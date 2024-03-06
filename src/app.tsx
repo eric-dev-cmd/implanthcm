@@ -133,4 +133,17 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 export const request: RequestConfig = {
   baseURL: 'https://hsdi.iclouds2.com',
   ...errorConfig,
+  requestInterceptors: [
+    (url, options) => {
+      const token = localStorage.getItem('token'); // Replace with your actual token key
+      if (token) {
+        options.headers = {
+          ...options.headers,
+          Authorization: `Bearer ${token}`,
+        };
+      }
+      return { url, options };
+    },
+  ],
+  responseInterceptors: [],
 };

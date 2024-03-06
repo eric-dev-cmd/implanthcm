@@ -89,31 +89,28 @@ const Login: React.FC = () => {
   };
 
   const handleSubmit = async (values: API.LoginParams) => {
-    try {
       // Login
-      const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
+      const data = await login({ ...values, type });
+      if(data.Data) {
+        const token = data.Data
+        localStorage.setItem('token', token);
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
-          defaultMessage: 'Login successful! ',
+          defaultMessage: 'Đăng nhập thành công! ',
         });
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         window.location.href = urlParams.get('redirect') || '/';
         return;
-      }
-      console.log(msg);
-      // If failed to set user error message
-      setUserLoginState(msg);
-    } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
+      } else {
+              const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
-        defaultMessage: 'Login failed, please try again!',
+        defaultMessage: 'Đăng nhập thất bại. Xin hãy thử lại!',
       });
-      console.log(error);
       message.error(defaultLoginFailureMessage);
-    }
+      }
+      setUserLoginState(data);
   };
   const { status, type: loginType } = userLoginState;
 
