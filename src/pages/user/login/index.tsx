@@ -1,16 +1,8 @@
-import { Footer } from '@/components';
 import { login } from '@/services/ant-design-pro/api';
-import {
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
-import { FormattedMessage, Helmet, SelectLang, useIntl, useModel } from '@umijs/max';
-import { Alert, message, Tabs } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { FormattedMessage, Helmet, Link, SelectLang, useIntl, useModel } from '@umijs/max';
+import { Alert, Button, message, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -148,9 +140,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="implanthcm "
-          subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.titleVN' })}
+          // logo={<img alt="logo" src="/logo.png" />}
           initialValues={{
             autoLogin: true,
           }}
@@ -242,12 +232,34 @@ const Login: React.FC = () => {
                 float: 'right',
               }}
             >
-              <FormattedMessage id="pages.login.forgotPassword" defaultMessage="Forget the password" />
+              <FormattedMessage
+                id="pages.login.forgotPassword"
+                defaultMessage="Forget the password"
+              />
             </a>
           </div>
         </LoginForm>
       </div>
-      <Footer />
+      <div
+        style={{
+          marginBottom: 500,
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ fontSize: 14 }}>Or Sign Up using</div>
+        <Link to="/user/register">
+          <Button
+            size="large"
+            // loading={submitting}
+            // className={styles.submit}
+            type="text"
+            htmlType="submit"
+            style={{ marginTop: 10, fontWeight: 'bold' }}
+          >
+            <span>SIGN UP</span>
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
