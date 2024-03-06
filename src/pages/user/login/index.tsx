@@ -1,12 +1,11 @@
 import { login } from '@/services/ant-design-pro/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
-import { FormattedMessage, Helmet, Link, SelectLang, useIntl, useModel } from '@umijs/max';
+import { FormattedMessage, Link, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, Button, message, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import Settings from '../../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -89,43 +88,33 @@ const Login: React.FC = () => {
   };
 
   const handleSubmit = async (values: API.LoginParams) => {
-      // Login
-      const data = await login({ ...values, type });
-      if(data.Data) {
-        const token = data.Data
-        localStorage.setItem('token', token);
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: 'pages.login.success',
-          defaultMessage: 'Đăng nhập thành công! ',
-        });
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
-        const urlParams = new URL(window.location.href).searchParams;
-        window.location.href = urlParams.get('redirect') || '/';
-        return;
-      } else {
-              const defaultLoginFailureMessage = intl.formatMessage({
+    // Login
+    const data = await login({ ...values, type });
+    if (data.Data) {
+      const token = data.Data;
+      localStorage.setItem('token', token);
+      const defaultLoginSuccessMessage = intl.formatMessage({
+        id: 'pages.login.success',
+        defaultMessage: 'Đăng nhập thành công! ',
+      });
+      message.success(defaultLoginSuccessMessage);
+      await fetchUserInfo();
+      const urlParams = new URL(window.location.href).searchParams;
+      window.location.href = urlParams.get('redirect') || '/';
+      return;
+    } else {
+      const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
         defaultMessage: 'Đăng nhập thất bại. Xin hãy thử lại!',
       });
       message.error(defaultLoginFailureMessage);
-      }
-      setUserLoginState(data);
+    }
+    setUserLoginState(data);
   };
   const { status, type: loginType } = userLoginState;
 
   return (
     <div className={styles.container}>
-      <Helmet>
-        <title>
-          {intl.formatMessage({
-            id: 'menu.login',
-            defaultMessage: 'Login Page',
-          })}
-          - {Settings.title}
-        </title>
-      </Helmet>
-      <Lang />
       <div
         style={{
           flex: '1',
@@ -243,7 +232,7 @@ const Login: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 14 }}>Or Sign Up using</div>
+        <div style={{ fontSize: 14 }}>Hoặc</div>
         <Link to="/user/register">
           <Button
             size="large"
@@ -253,7 +242,7 @@ const Login: React.FC = () => {
             htmlType="submit"
             style={{ marginTop: 10, fontWeight: 'bold' }}
           >
-            <span>SIGN UP</span>
+            <span>Đăng ký</span>
           </Button>
         </Link>
       </div>
