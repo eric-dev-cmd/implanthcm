@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -153,7 +153,7 @@ const useStyles = createStyles(({ token }) => {
         display: 'none',
       },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

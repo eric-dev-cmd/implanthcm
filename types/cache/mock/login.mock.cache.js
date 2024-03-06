@@ -321,4 +321,4 @@ module.exports = {
     type: 'account',
     currentAuthority: 'admin',
   },
-};
+}

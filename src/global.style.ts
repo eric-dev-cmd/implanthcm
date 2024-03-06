@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({}) => {
   return {
@@ -36,7 +36,7 @@ const useStyles = createStyles(({}) => {
         },
       },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

@@ -1,12 +1,12 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Area } from '@ant-design/plots';
-import { Card, Col, Row, Table, Tooltip } from 'antd';
-import numeral from 'numeral';
-import React from 'react';
-import type { DataItem } from '../data.d';
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { Area } from '@ant-design/plots'
+import { Card, Col, Row, Table, Tooltip } from 'antd'
+import numeral from 'numeral'
+import React from 'react'
+import type { DataItem } from '../data.d'
 // import useStyles from '../style.style';
-import NumberInfo from './NumberInfo';
-import Trend from './Trend';
+import NumberInfo from './NumberInfo'
+import Trend from './Trend'
 
 const TopSearch = ({
   loading,
@@ -14,10 +14,10 @@ const TopSearch = ({
   searchData,
   dropdownGroup,
 }: {
-  loading: boolean;
-  visitData2: DataItem[];
-  dropdownGroup: React.ReactNode;
-  searchData: DataItem[];
+  loading: boolean
+  visitData2: DataItem[]
+  dropdownGroup: React.ReactNode
+  searchData: DataItem[]
 }) => {
   // const { styles } = useStyles();
   const columns = [
@@ -38,10 +38,10 @@ const TopSearch = ({
       key: 'count',
       sorter: (
         a: {
-          count: number;
+          count: number
         },
         b: {
-          count: number;
+          count: number
         },
       ) => a.count - b.count,
     },
@@ -51,30 +51,29 @@ const TopSearch = ({
       key: 'range',
       sorter: (
         a: {
-          range: number;
+          range: number
         },
         b: {
-          range: number;
+          range: number
         },
       ) => a.range - b.range,
       render: (
         text: React.ReactNode,
         record: {
-          status: number;
+          status: number
         },
       ) => (
         <Trend flag={record.status === 1 ? 'down' : 'up'}>
           <span
             style={{
               marginRight: 4,
-            }}
-          >
+            }}>
             {text}%
           </span>
         </Trend>
       ),
     },
-  ];
+  ]
   return (
     <Card
       loading={loading}
@@ -83,16 +82,14 @@ const TopSearch = ({
       extra={dropdownGroup}
       style={{
         height: '100%',
-      }}
-    >
+      }}>
       <Row gutter={68}>
         <Col
           sm={12}
           xs={24}
           style={{
             marginBottom: 24,
-          }}
-        >
+          }}>
           <NumberInfo
             subTitle={
               <span>
@@ -127,8 +124,7 @@ const TopSearch = ({
           xs={24}
           style={{
             marginBottom: 24,
-          }}
-        >
+          }}>
           <NumberInfo
             subTitle={
               <span>
@@ -160,7 +156,7 @@ const TopSearch = ({
         </Col>
       </Row>
       <Table<any>
-        rowKey={(record) => record.index}
+        rowKey={record => record.index}
         size="small"
         columns={columns}
         dataSource={searchData}
@@ -172,6 +168,6 @@ const TopSearch = ({
         }}
       />
     </Card>
-  );
-};
-export default TopSearch;
+  )
+}
+export default TopSearch

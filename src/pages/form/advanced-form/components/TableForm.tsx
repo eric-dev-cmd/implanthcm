@@ -1,52 +1,52 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
-import type { FC } from 'react';
-import React, { useState } from 'react';
-import useStyles from '../style.style';
+import { PlusOutlined } from '@ant-design/icons'
+import { Button, Divider, Input, message, Popconfirm, Table } from 'antd'
+import type { FC } from 'react'
+import React, { useState } from 'react'
+import useStyles from '../style.style'
 type TableFormDateType = {
-  key: string;
-  workId?: string;
-  name?: string;
-  department?: string;
-  isNew?: boolean;
-  editable?: boolean;
-};
+  key: string
+  workId?: string
+  name?: string
+  department?: string
+  isNew?: boolean
+  editable?: boolean
+}
 type TableFormProps = {
-  value?: TableFormDateType[];
-  onChange?: (value: TableFormDateType[]) => void;
-};
+  value?: TableFormDateType[]
+  onChange?: (value: TableFormDateType[]) => void
+}
 const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
-  const { styles } = useStyles();
-  const [clickedCancel, setClickedCancel] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [cacheOriginData, setCacheOriginData] = useState<Record<string, any>>({});
-  const [data, setData] = useState(value);
+  const { styles } = useStyles()
+  const [clickedCancel, setClickedCancel] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [index, setIndex] = useState(0)
+  const [cacheOriginData, setCacheOriginData] = useState<Record<string, any>>({})
+  const [data, setData] = useState(value)
   const getRowByKey = (key: string, newData?: TableFormDateType[]) =>
-    (newData || data)?.filter((item) => item.key === key)[0];
+    (newData || data)?.filter(item => item.key === key)[0]
   const toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
-    e.preventDefault();
-    const newData = data?.map((item) => ({
+    e.preventDefault()
+    const newData = data?.map(item => ({
       ...item,
-    }));
-    const target = getRowByKey(key, newData);
+    }))
+    const target = getRowByKey(key, newData)
     if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.editable) {
         cacheOriginData[key] = {
           ...target,
-        };
-        setCacheOriginData(cacheOriginData);
+        }
+        setCacheOriginData(cacheOriginData)
       }
-      target.editable = !target.editable;
-      setData(newData);
+      target.editable = !target.editable
+      setData(newData)
     }
-  };
+  }
   const newMember = () => {
     const newData =
-      data?.map((item) => ({
+      data?.map(item => ({
         ...item,
-      })) || [];
+      })) || []
     newData.push({
       key: `NEW_TEMP_ID_${index}`,
       workId: '',
@@ -54,81 +54,81 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
       department: '',
       editable: true,
       isNew: true,
-    });
-    setIndex(index + 1);
-    setData(newData);
-  };
+    })
+    setIndex(index + 1)
+    setData(newData)
+  }
   const remove = (key: string) => {
-    const newData = data?.filter((item) => item.key !== key) as TableFormDateType[];
-    setData(newData);
+    const newData = data?.filter(item => item.key !== key) as TableFormDateType[]
+    setData(newData)
     if (onChange) {
-      onChange(newData);
+      onChange(newData)
     }
-  };
+  }
   const handleFieldChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     fieldName: keyof TableFormDateType,
     key: string,
   ) => {
-    const newData = [...(data as TableFormDateType[])];
-    const target = getRowByKey(key, newData);
+    const newData = [...(data as TableFormDateType[])]
+    const target = getRowByKey(key, newData)
     if (target && target[fieldName]) {
-      target[fieldName as 'key'] = e.target.value;
-      setData(newData);
+      target[fieldName as 'key'] = e.target.value
+      setData(newData)
     }
-  };
+  }
   const saveRow = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
-    e.persist();
-    setLoading(true);
+    e.persist()
+    setLoading(true)
     setTimeout(() => {
       if (clickedCancel) {
-        setClickedCancel(false);
-        return;
+        setClickedCancel(false)
+        return
       }
-      const target = getRowByKey(key) || ({} as any);
+      const target = getRowByKey(key) || ({} as any)
       if (!target.workId || !target.name || !target.department) {
-        message.error('请填写完整成员信息。');
-        (e.target as HTMLInputElement).focus();
-        setLoading(false);
-        return;
+        message.error('请填写完整成员信息。')
+        ;(e.target as HTMLInputElement).focus()
+        setLoading(false)
+        return
       }
-      delete target.isNew;
-      toggleEditable(e, key);
+      delete target.isNew
+      toggleEditable(e, key)
       if (onChange) {
-        onChange(data as TableFormDateType[]);
+        onChange(data as TableFormDateType[])
       }
-      setLoading(false);
-    }, 500);
-  };
+      setLoading(false)
+    }, 500)
+  }
   const handleKeyPress = (e: React.KeyboardEvent, key: string) => {
     if (e.key === 'Enter') {
-      saveRow(e, key);
+      saveRow(e, key)
     }
-  };
+  }
   const cancel = (e: React.MouseEvent, key: string) => {
-    setClickedCancel(true);
-    e.preventDefault();
-    const newData = [...(data as TableFormDateType[])];
+    setClickedCancel(true)
+    e.preventDefault()
+    const newData = [...(data as TableFormDateType[])]
     // 编辑前的原始数据
-    let cacheData = [];
-    cacheData = newData.map((item) => {
+    let cacheData = []
+    cacheData = newData.map(item => {
       if (item.key === key) {
         if (cacheOriginData[key]) {
           const originItem = {
             ...item,
             ...cacheOriginData[key],
             editable: false,
-          };
-          delete cacheOriginData[key];
-          setCacheOriginData(cacheOriginData);
-          return originItem;
+          }
+          delete cacheOriginData[key]
+          setCacheOriginData(cacheOriginData)
+          return originItem
         }
       }
-      return item;
-    });
-    setData(cacheData);
-    setClickedCancel(false);
-  };
+      return item
+    })
+    setData(cacheData)
+    setClickedCancel(false)
+  }
   const columns = [
     {
       title: '成员姓名',
@@ -141,13 +141,13 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
             <Input
               value={text}
               autoFocus
-              onChange={(e) => handleFieldChange(e, 'name', record.key)}
-              onKeyPress={(e) => handleKeyPress(e, record.key)}
+              onChange={e => handleFieldChange(e, 'name', record.key)}
+              onKeyPress={e => handleKeyPress(e, record.key)}
               placeholder="成员姓名"
             />
-          );
+          )
         }
-        return text;
+        return text
       },
     },
     {
@@ -160,13 +160,13 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
           return (
             <Input
               value={text}
-              onChange={(e) => handleFieldChange(e, 'workId', record.key)}
-              onKeyPress={(e) => handleKeyPress(e, record.key)}
+              onChange={e => handleFieldChange(e, 'workId', record.key)}
+              onKeyPress={e => handleKeyPress(e, record.key)}
               placeholder="工号"
             />
-          );
+          )
         }
-        return text;
+        return text
       },
     },
     {
@@ -179,13 +179,13 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
           return (
             <Input
               value={text}
-              onChange={(e) => handleFieldChange(e, 'department', record.key)}
-              onKeyPress={(e) => handleKeyPress(e, record.key)}
+              onChange={e => handleFieldChange(e, 'department', record.key)}
+              onKeyPress={e => handleKeyPress(e, record.key)}
               placeholder="所属部门"
             />
-          );
+          )
         }
-        return text;
+        return text
       },
     },
     {
@@ -193,40 +193,40 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
       key: 'action',
       render: (text: string, record: TableFormDateType) => {
         if (!!record.editable && loading) {
-          return null;
+          return null
         }
         if (record.editable) {
           if (record.isNew) {
             return (
               <span>
-                <a onClick={(e) => saveRow(e, record.key)}>添加</a>
+                <a onClick={e => saveRow(e, record.key)}>添加</a>
                 <Divider type="vertical" />
                 <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
                   <a>删除</a>
                 </Popconfirm>
               </span>
-            );
+            )
           }
           return (
             <span>
-              <a onClick={(e) => saveRow(e, record.key)}>保存</a>
+              <a onClick={e => saveRow(e, record.key)}>保存</a>
               <Divider type="vertical" />
-              <a onClick={(e) => cancel(e, record.key)}>取消</a>
+              <a onClick={e => cancel(e, record.key)}>取消</a>
             </span>
-          );
+          )
         }
         return (
           <span>
-            <a onClick={(e) => toggleEditable(e, record.key)}>编辑</a>
+            <a onClick={e => toggleEditable(e, record.key)}>编辑</a>
             <Divider type="vertical" />
             <Popconfirm title="是否要删除此行？" onConfirm={() => remove(record.key)}>
               <a>删除</a>
             </Popconfirm>
           </span>
-        );
+        )
       },
     },
-  ];
+  ]
   return (
     <>
       <Table<TableFormDateType>
@@ -234,7 +234,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        rowClassName={(record) => (record.editable ? styles.editable : '')}
+        rowClassName={record => (record.editable ? styles.editable : '')}
       />
       <Button
         style={{
@@ -243,12 +243,11 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
           marginBottom: 8,
         }}
         type="dashed"
-        onClick={newMember}
-      >
+        onClick={newMember}>
         <PlusOutlined />
         新增成员
       </Button>
     </>
-  );
-};
-export default TableForm;
+  )
+}
+export default TableForm

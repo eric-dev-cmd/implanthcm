@@ -1,11 +1,11 @@
-import { login } from '@/services/ant-design-pro/api';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
-import { FormattedMessage, Link, SelectLang, useIntl, useModel } from '@umijs/max';
-import { Alert, Button, message, Tabs } from 'antd';
-import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
-import { flushSync } from 'react-dom';
+import { login } from '@/services/ant-design-pro/api'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components'
+import { FormattedMessage, Link, useIntl, useModel } from '@umijs/max'
+import { Alert, Button, message, Tabs } from 'antd'
+import { createStyles } from 'antd-style'
+import React, { useState } from 'react'
+import { flushSync } from 'react-dom'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -40,21 +40,21 @@ const useStyles = createStyles(({ token }) => {
         "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
       backgroundSize: '100% 100%',
     },
-  };
-});
+  }
+})
 
-const Lang = () => {
-  const { styles } = useStyles();
+// const Lang = () => {
+//   const { styles } = useStyles();
 
-  return (
-    <div className={styles.lang} data-lang>
-      {SelectLang && <SelectLang />}
-    </div>
-  );
-};
+//   return (
+//     <div className={styles.lang} data-lang>
+//       {SelectLang && <SelectLang />}
+//     </div>
+//   );
+// };
 
 const LoginMessage: React.FC<{
-  content: string;
+  content: string
 }> = ({ content }) => {
   return (
     <Alert
@@ -65,53 +65,53 @@ const LoginMessage: React.FC<{
       type="error"
       showIcon
     />
-  );
-};
+  )
+}
 
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
-  const [type, setType] = useState<string>('account');
-  const { initialState, setInitialState } = useModel('@@initialState');
-  const { styles } = useStyles();
-  const intl = useIntl();
+  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({})
+  const [type, setType] = useState<string>('account')
+  const { initialState, setInitialState } = useModel('@@initialState')
+  const { styles } = useStyles()
+  const intl = useIntl()
 
   const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
+    const userInfo = await initialState?.fetchUserInfo?.()
     if (userInfo) {
       flushSync(() => {
-        setInitialState((s) => ({
+        setInitialState(s => ({
           ...s,
           currentUser: userInfo,
-        }));
-      });
+        }))
+      })
     }
-  };
+  }
 
   const handleSubmit = async (values: API.LoginParams) => {
     // Login
-    const data = await login({ ...values, type });
+    const data = await login({ ...values, type })
     if (data.Data) {
-      const token = data.Data;
-      localStorage.setItem('token', token);
+      const token = data.Data
+      localStorage.setItem('token', token)
       const defaultLoginSuccessMessage = intl.formatMessage({
         id: 'pages.login.success',
         defaultMessage: 'Đăng nhập thành công! ',
-      });
-      message.success(defaultLoginSuccessMessage);
-      await fetchUserInfo();
-      const urlParams = new URL(window.location.href).searchParams;
-      window.location.href = urlParams.get('redirect') || '/';
-      return;
+      })
+      message.success(defaultLoginSuccessMessage)
+      await fetchUserInfo()
+      const urlParams = new URL(window.location.href).searchParams
+      window.location.href = urlParams.get('redirect') || '/'
+      return
     } else {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
         defaultMessage: 'Đăng nhập thất bại. Xin hãy thử lại!',
-      });
-      message.error(defaultLoginFailureMessage);
+      })
+      message.error(defaultLoginFailureMessage)
     }
-    setUserLoginState(data);
-  };
-  const { status, type: loginType } = userLoginState;
+    setUserLoginState(data)
+  }
+  const { status, type: loginType } = userLoginState
 
   return (
     <div className={styles.container}>
@@ -119,8 +119,7 @@ const Login: React.FC = () => {
         style={{
           flex: '1',
           padding: '32px 0',
-        }}
-      >
+        }}>
         <LoginForm
           contentStyle={{
             minWidth: 280,
@@ -130,10 +129,9 @@ const Login: React.FC = () => {
           initialValues={{
             autoLogin: true,
           }}
-          onFinish={async (values) => {
-            await handleSubmit(values as API.LoginParams);
-          }}
-        >
+          onFinish={async values => {
+            await handleSubmit(values as API.LoginParams)
+          }}>
           <Tabs
             activeKey={type}
             onChange={setType}
@@ -208,16 +206,14 @@ const Login: React.FC = () => {
           <div
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <ProFormCheckbox noStyle name="autoLogin">
               <FormattedMessage id="pages.login.rememberMe" defaultMessage="Auto Login" />
             </ProFormCheckbox>
             <a
               style={{
                 float: 'right',
-              }}
-            >
+              }}>
               <FormattedMessage
                 id="pages.login.forgotPassword"
                 defaultMessage="Forget the password"
@@ -230,8 +226,7 @@ const Login: React.FC = () => {
         style={{
           marginBottom: 500,
           textAlign: 'center',
-        }}
-      >
+        }}>
         <div style={{ fontSize: 14 }}>Hoặc</div>
         <Link to="/user/register">
           <Button
@@ -240,14 +235,13 @@ const Login: React.FC = () => {
             // className={styles.submit}
             type="text"
             htmlType="submit"
-            style={{ marginTop: 10, fontWeight: 'bold' }}
-          >
+            style={{ marginTop: 10, fontWeight: 'bold' }}>
             <span>Đăng ký</span>
           </Button>
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

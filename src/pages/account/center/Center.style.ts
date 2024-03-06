@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -63,7 +63,7 @@ const useStyles = createStyles(({ token }) => {
     tabsCard: {
       '.ant-card-head': { padding: '0 16px' },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

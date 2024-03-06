@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -43,7 +43,7 @@ const useStyles = createStyles(({ token }) => {
     coverCardList: {
       '.ant-list .ant-list-item-content-single': { maxWidth: '100%' },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

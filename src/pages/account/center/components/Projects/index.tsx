@@ -1,21 +1,21 @@
-import { useRequest } from '@umijs/max';
-import { Card, List } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
-import type { ListItemDataType } from '../../data.d';
-import { queryFakeList } from '../../service';
-import AvatarList from '../AvatarList';
-import useStyles from './index.style';
-dayjs.extend(relativeTime);
+import { useRequest } from '@umijs/max'
+import { Card, List } from 'antd'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import React from 'react'
+import type { ListItemDataType } from '../../data.d'
+import { queryFakeList } from '../../service'
+import AvatarList from '../AvatarList'
+import useStyles from './index.style'
+dayjs.extend(relativeTime)
 const Projects: React.FC = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   // 获取tab列表数据
   const { data: listData } = useRequest(() => {
     return queryFakeList({
       count: 30,
-    });
-  });
+    })
+  })
   return (
     <List<ListItemDataType>
       className={styles.coverCardList}
@@ -30,7 +30,7 @@ const Projects: React.FC = () => {
         xs: 1,
       }}
       dataSource={listData?.list || []}
-      renderItem={(item) => (
+      renderItem={item => (
         <List.Item>
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
@@ -38,7 +38,7 @@ const Projects: React.FC = () => {
               <span>{dayjs(item.updatedAt).fromNow()}</span>
               <div className={styles.avatarList}>
                 <AvatarList size="small">
-                  {item.members.map((member) => (
+                  {item.members.map(member => (
                     <AvatarList.Item
                       key={`${item.id}-avatar-${member.id}`}
                       src={member.avatar}
@@ -52,6 +52,6 @@ const Projects: React.FC = () => {
         </List.Item>
       )}
     />
-  );
-};
-export default Projects;
+  )
+}
+export default Projects

@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -13,7 +13,7 @@ const useStyles = createStyles(({ token }) => {
     },
     main: {
       width: '368px',
-      marginTop: '50px !important' ,
+      marginTop: '50px !important',
       margin: '0 auto',
       h3: { marginBottom: '20px', fontSize: '16px' },
     },
@@ -47,7 +47,7 @@ const useStyles = createStyles(({ token }) => {
     'progress-pass > .progress': {
       '.ant-progress-bg': { backgroundColor: token.colorWarning },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

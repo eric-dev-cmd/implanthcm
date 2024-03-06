@@ -56,4 +56,4 @@ export default {
   'app.settings.notification.todo-description': 'করণীয় তালিকাটি স্টেশন থেকে চিঠি আকারে জানানো হবে',
   'app.settings.open': 'খোলা',
   'app.settings.close': 'বন্ধ',
-};
+}

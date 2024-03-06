@@ -1,5 +1,5 @@
-import { DefaultFooter } from '@ant-design/pro-components';
-import React from 'react';
+import { DefaultFooter } from '@ant-design/pro-components'
+import React from 'react'
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
       }}
       copyright="Powered by implanthcm"
     />
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

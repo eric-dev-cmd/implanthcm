@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -50,7 +50,7 @@ const useStyles = createStyles(({ token }) => {
     'anticon-caret-down': {
       color: token['green-6'],
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

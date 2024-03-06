@@ -3,9 +3,9 @@ import {
   DownOutlined,
   EllipsisOutlined,
   InfoCircleOutlined,
-} from '@ant-design/icons';
-import { GridContent, PageContainer, RouteContext } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+} from '@ant-design/icons'
+import { GridContent, PageContainer, RouteContext } from '@ant-design/pro-components'
+import { useRequest } from '@umijs/max'
 import {
   Badge,
   Button,
@@ -20,16 +20,16 @@ import {
   Steps,
   Table,
   Tooltip,
-} from 'antd';
-import classNames from 'classnames';
-import type { FC } from 'react';
-import React, { Fragment, useState } from 'react';
-import type { AdvancedProfileData } from './data.d';
-import { queryAdvancedProfile } from './service';
-import useStyles from './style.style';
+} from 'antd'
+import classNames from 'classnames'
+import type { FC } from 'react'
+import React, { Fragment, useState } from 'react'
+import type { AdvancedProfileData } from './data.d'
+import { queryAdvancedProfile } from './service'
+import useStyles from './style.style'
 
-const { Step } = Steps;
-const ButtonGroup = Button.Group;
+const { Step } = Steps
+const ButtonGroup = Button.Group
 
 const action = (
   <RouteContext.Consumer>
@@ -55,11 +55,10 @@ const action = (
                 },
               ],
             }}
-            placement="bottomRight"
-          >
+            placement="bottomRight">
             主操作
           </Dropdown.Button>
-        );
+        )
       }
       return (
         <Space>
@@ -83,8 +82,7 @@ const action = (
                   },
                 ],
               }}
-              placement="bottomRight"
-            >
+              placement="bottomRight">
               <Button>
                 <EllipsisOutlined />
               </Button>
@@ -92,10 +90,10 @@ const action = (
           </ButtonGroup>
           <Button type="primary">主操作</Button>
         </Space>
-      );
+      )
     }}
   </RouteContext.Consumer>
-);
+)
 
 const operationTabList = [
   {
@@ -110,7 +108,7 @@ const operationTabList = [
     key: 'tab3',
     tab: '操作日志三',
   },
-];
+]
 const columns = [
   {
     title: '操作类型',
@@ -128,9 +126,9 @@ const columns = [
     key: 'status',
     render: (text: string) => {
       if (text === 'agree') {
-        return <Badge status="success" text="成功" />;
+        return <Badge status="success" text="成功" />
       }
-      return <Badge status="error" text="驳回" />;
+      return <Badge status="error" text="驳回" />
     },
   },
   {
@@ -143,20 +141,20 @@ const columns = [
     dataIndex: 'memo',
     key: 'memo',
   },
-];
+]
 type AdvancedState = {
-  operationKey: 'tab1' | 'tab2' | 'tab3';
-  tabActiveKey: string;
-};
+  operationKey: 'tab1' | 'tab2' | 'tab3'
+  tabActiveKey: string
+}
 const Advanced: FC = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   const extra = (
     <div className={styles.moreInfo}>
       <Statistic title="状态" value="待审批" />
       <Statistic title="订单金额" value={568.08} prefix="¥" />
     </div>
-  );
+  )
   const description = (
     <RouteContext.Consumer>
       {({ isMobile }) => (
@@ -172,7 +170,7 @@ const Advanced: FC = () => {
         </Descriptions>
       )}
     </RouteContext.Consumer>
-  );
+  )
   const desc1 = (
     <div className={classNames(styles.stepDescription)}>
       <Fragment>
@@ -185,7 +183,7 @@ const Advanced: FC = () => {
       </Fragment>
       <div>2016-12-12 12:32</div>
     </div>
-  );
+  )
   const desc2 = (
     <div className={styles.stepDescription}>
       <Fragment>
@@ -201,41 +199,38 @@ const Advanced: FC = () => {
         <a href="">催一下</a>
       </div>
     </div>
-  );
+  )
 
   const [tabStatus, seTabStatus] = useState<AdvancedState>({
     operationKey: 'tab1',
     tabActiveKey: 'detail',
-  });
+  })
 
   const customDot = (
     dot: React.ReactNode,
     {
       status,
     }: {
-      status: string;
+      status: string
     },
   ) => {
     const popoverContent = (
       <div
         style={{
           width: 160,
-        }}
-      >
+        }}>
         吴加号
         <span
           style={{
             float: 'right',
-          }}
-        >
+          }}>
           <Badge
             status="default"
             text={
               <span
                 style={{
                   color: 'rgba(0, 0, 0, 0.45)',
-                }}
-              >
+                }}>
                 未响应
               </span>
             }
@@ -244,26 +239,25 @@ const Advanced: FC = () => {
         <div
           style={{
             marginTop: 4,
-          }}
-        >
+          }}>
           耗时：2小时25分钟
         </div>
       </div>
-    );
+    )
     if (status === 'process') {
       return (
         <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
           <span>{dot}</span>
         </Popover>
-      );
+      )
     }
-    return dot;
-  };
+    return dot
+  }
 
   const { data = {}, loading } = useRequest<{
-    data: AdvancedProfileData;
-  }>(queryAdvancedProfile);
-  const { advancedOperation1, advancedOperation2, advancedOperation3 } = data;
+    data: AdvancedProfileData
+  }>(queryAdvancedProfile)
+  const { advancedOperation1, advancedOperation2, advancedOperation3 } = data
   const contentList = {
     tab1: (
       <Table
@@ -289,19 +283,19 @@ const Advanced: FC = () => {
         columns={columns}
       />
     ),
-  };
+  }
   const onTabChange = (tabActiveKey: string) => {
     seTabStatus({
       ...tabStatus,
       tabActiveKey,
-    });
-  };
+    })
+  }
   const onOperationTabChange = (key: string) => {
     seTabStatus({
       ...tabStatus,
       operationKey: key as 'tab1',
-    });
-  };
+    })
+  }
   return (
     <PageContainer
       title="单号：234231029431"
@@ -320,23 +314,20 @@ const Advanced: FC = () => {
           key: 'rule',
           tab: '规则',
         },
-      ]}
-    >
+      ]}>
       <div className={styles.main}>
         <GridContent>
           <Card
             title="流程进度"
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <RouteContext.Consumer>
               {({ isMobile }) => (
                 <Steps
                   direction={isMobile ? 'vertical' : 'horizontal'}
                   progressDot={customDot}
-                  current={1}
-                >
+                  current={1}>
                   <Step title="创建项目" description={desc1} />
                   <Step title="部门初审" description={desc2} />
                   <Step title="财务复核" />
@@ -350,13 +341,11 @@ const Advanced: FC = () => {
             style={{
               marginBottom: 24,
             }}
-            bordered={false}
-          >
+            bordered={false}>
             <Descriptions
               style={{
                 marginBottom: 24,
-              }}
-            >
+              }}>
               <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
               <Descriptions.Item label="会员卡号">32943898021309809423</Descriptions.Item>
               <Descriptions.Item label="身份证">3321944288191034921</Descriptions.Item>
@@ -369,8 +358,7 @@ const Advanced: FC = () => {
               style={{
                 marginBottom: 24,
               }}
-              title="信息组"
-            >
+              title="信息组">
               <Descriptions.Item label="某某数据">725</Descriptions.Item>
               <Descriptions.Item label="该数据更新时间">2017-08-08</Descriptions.Item>
               <Descriptions.Item
@@ -386,8 +374,7 @@ const Advanced: FC = () => {
                       />
                     </Tooltip>
                   </span>
-                }
-              >
+                }>
                 725
               </Descriptions.Item>
               <Descriptions.Item label="该数据更新时间">2017-08-08</Descriptions.Item>
@@ -395,8 +382,7 @@ const Advanced: FC = () => {
             <h4
               style={{
                 marginBottom: 16,
-              }}
-            >
+              }}>
               信息组
             </h4>
             <Card type="inner" title="多层级信息组">
@@ -404,8 +390,7 @@ const Advanced: FC = () => {
                 style={{
                   marginBottom: 16,
                 }}
-                title="组名称"
-              >
+                title="组名称">
                 <Descriptions.Item label="负责人">林东东</Descriptions.Item>
                 <Descriptions.Item label="角色码">1234567</Descriptions.Item>
                 <Descriptions.Item label="所属部门">XX公司 - YY部</Descriptions.Item>
@@ -424,8 +409,7 @@ const Advanced: FC = () => {
                   marginBottom: 16,
                 }}
                 title="组名称"
-                column={1}
-              >
+                column={1}>
                 <Descriptions.Item label="学名">
                   Citrullus lanatus (Thunb.) Matsum. et
                   Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
@@ -447,8 +431,7 @@ const Advanced: FC = () => {
             style={{
               marginBottom: 24,
             }}
-            bordered={false}
-          >
+            bordered={false}>
             <Empty />
           </Card>
           <Card bordered={false} tabList={operationTabList} onTabChange={onOperationTabChange}>
@@ -457,6 +440,6 @@ const Advanced: FC = () => {
         </GridContent>
       </div>
     </PageContainer>
-  );
-};
-export default Advanced;
+  )
+}
+export default Advanced

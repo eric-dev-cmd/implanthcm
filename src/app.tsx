@@ -1,50 +1,50 @@
-import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/components';
-import { LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { SettingDrawer } from '@ant-design/pro-components';
-import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
-import defaultSettings from '../config/defaultSettings';
-import { errorConfig } from './requestErrorConfig';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-const isDev = process.env.NODE_ENV === 'development';
-const loginPath = '/user/login';
+import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/components'
+import { LinkOutlined } from '@ant-design/icons'
+import type { Settings as LayoutSettings } from '@ant-design/pro-components'
+import { SettingDrawer } from '@ant-design/pro-components'
+import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max'
+import { history, Link } from '@umijs/max'
+import defaultSettings from '../config/defaultSettings'
+import { errorConfig } from './requestErrorConfig'
+import { currentUser as queryCurrentUser } from './services/ant-design-pro/api'
+const isDev = process.env.NODE_ENV === 'development'
+const loginPath = '/user/login'
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
-  settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  settings?: Partial<LayoutSettings>
+  currentUser?: API.CurrentUser
+  loading?: boolean
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>
 }> {
   const fetchUserInfo = async () => {
     try {
       const msg = await queryCurrentUser({
         skipErrorHandler: true,
-      });
-      return msg.data;
+      })
+      return msg.data
     } catch (error) {
       // TODO: handle authen
       // history.push(loginPath);
     }
-    return undefined;
-  };
+    return undefined
+  }
   // 如果不是登录页面，执行
-  const { location } = history;
+  const { location } = history
   if (![loginPath, '/user/register', '/user/register-result'].includes(location.pathname)) {
-    const currentUser = await fetchUserInfo();
+    const currentUser = await fetchUserInfo()
     return {
       fetchUserInfo,
       currentUser,
       settings: defaultSettings as Partial<LayoutSettings>,
-    };
+    }
   }
   return {
     fetchUserInfo,
     settings: defaultSettings as Partial<LayoutSettings>,
-  };
+  }
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
@@ -55,7 +55,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
-        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
+        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>
       },
     },
     waterMarkProps: {
@@ -63,7 +63,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
-      const { location } = history;
+      const { location } = history
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         // TODO: handle authen
@@ -102,7 +102,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
-    childrenRender: (children) => {
+    childrenRender: children => {
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
@@ -112,20 +112,20 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               disableUrlParams
               enableDarkTheme
               settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
+              onSettingChange={settings => {
+                setInitialState(preInitialState => ({
                   ...preInitialState,
                   settings,
-                }));
+                }))
               }}
             />
           )}
         </>
-      );
+      )
     },
     ...initialState?.settings,
-  };
-};
+  }
+}
 
 /**
  * @name request 配置，可以配置错误处理
@@ -137,15 +137,15 @@ export const request: RequestConfig = {
   ...errorConfig,
   requestInterceptors: [
     (url, options) => {
-      const token = localStorage.getItem('token'); // Replace with your actual token key
+      const token = localStorage.getItem('token') // Replace with your actual token key
       if (token) {
         options.headers = {
           ...options.headers,
           Authorization: `Bearer ${token}`,
-        };
+        }
       }
-      return { url, options };
+      return { url, options }
     },
   ],
   responseInterceptors: [],
-};
+}

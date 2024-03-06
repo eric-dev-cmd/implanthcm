@@ -4,24 +4,24 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { Button, Result } from 'antd';
-import type { FC } from 'react';
-import type { BasicListItemDataType } from '../data.d';
-import useStyles from '../style.style';
+} from '@ant-design/pro-components'
+import { Button, Result } from 'antd'
+import type { FC } from 'react'
+import type { BasicListItemDataType } from '../data.d'
+import useStyles from '../style.style'
 type OperationModalProps = {
-  done: boolean;
-  open: boolean;
-  current: Partial<BasicListItemDataType> | undefined;
-  onDone: () => void;
-  onSubmit: (values: BasicListItemDataType) => void;
-  children?: React.ReactNode;
-};
-const OperationModal: FC<OperationModalProps> = (props) => {
-  const { styles } = useStyles();
-  const { done, open, current, onDone, onSubmit, children } = props;
+  done: boolean
+  open: boolean
+  current: Partial<BasicListItemDataType> | undefined
+  onDone: () => void
+  onSubmit: (values: BasicListItemDataType) => void
+  children?: React.ReactNode
+}
+const OperationModal: FC<OperationModalProps> = props => {
+  const { styles } = useStyles()
+  const { done, open, current, onDone, onSubmit, children } = props
   if (!open) {
-    return null;
+    return null
   }
   return (
     <ModalForm<BasicListItemDataType>
@@ -29,8 +29,8 @@ const OperationModal: FC<OperationModalProps> = (props) => {
       title={done ? null : `任务${current ? '编辑' : '添加'}`}
       className={styles.standardListForm}
       width={640}
-      onFinish={async (values) => {
-        onSubmit(values);
+      onFinish={async values => {
+        onSubmit(values)
       }}
       initialValues={current}
       submitter={{
@@ -45,8 +45,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
               padding: '72px 0',
             }
           : {},
-      }}
-    >
+      }}>
       {!done ? (
         <>
           <ProFormText
@@ -123,6 +122,6 @@ const OperationModal: FC<OperationModalProps> = (props) => {
         />
       )}
     </ModalForm>
-  );
-};
-export default OperationModal;
+  )
+}
+export default OperationModal

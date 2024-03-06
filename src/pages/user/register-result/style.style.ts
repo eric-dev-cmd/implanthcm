@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(() => {
   return {
@@ -21,6 +21,6 @@ const useStyles = createStyles(() => {
       marginTop: '40px',
       'a + a': { marginLeft: '8px' },
     },
-  };
-});
-export default useStyles;
+  }
+})
+export default useStyles

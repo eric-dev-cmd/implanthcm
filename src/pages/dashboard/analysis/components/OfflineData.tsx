@@ -1,22 +1,21 @@
-import { Line, Tiny } from '@ant-design/plots';
-import { Card, Col, Row, Tabs } from 'antd';
-import type { DataItem, OfflineDataType } from '../data.d';
-import useStyles from '../style.style';
-import NumberInfo from './NumberInfo';
+import { Line, Tiny } from '@ant-design/plots'
+import { Card, Col, Row, Tabs } from 'antd'
+import type { DataItem, OfflineDataType } from '../data.d'
+import useStyles from '../style.style'
+import NumberInfo from './NumberInfo'
 const CustomTab = ({
   data,
   currentTabKey: currentKey,
 }: {
-  data: OfflineDataType;
-  currentTabKey: string;
+  data: OfflineDataType
+  currentTabKey: string
 }) => (
   <Row
     gutter={8}
     style={{
       width: 138,
       margin: '8px 0',
-    }}
-  >
+    }}>
     <Col span={12}>
       <NumberInfo
         title={data.name}
@@ -30,12 +29,11 @@ const CustomTab = ({
       span={12}
       style={{
         paddingTop: 36,
-      }}
-    >
+      }}>
       <Tiny.Ring height={60} width={60} percent={data.cvr} color={['#E8EEF4', '#5FABF4']} />
     </Col>
   </Row>
-);
+)
 
 const OfflineData = ({
   activeKey,
@@ -44,13 +42,13 @@ const OfflineData = ({
   offlineChartData,
   handleTabChange,
 }: {
-  activeKey: string;
-  loading: boolean;
-  offlineData: OfflineDataType[];
-  offlineChartData: DataItem[];
-  handleTabChange: (activeKey: string) => void;
+  activeKey: string
+  loading: boolean
+  offlineData: OfflineDataType[]
+  offlineChartData: DataItem[]
+  handleTabChange: (activeKey: string) => void
 }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <Card
       loading={loading}
@@ -58,20 +56,18 @@ const OfflineData = ({
       bordered={false}
       style={{
         marginTop: 32,
-      }}
-    >
+      }}>
       <Tabs
         activeKey={activeKey}
         onChange={handleTabChange}
-        items={offlineData.map((shop) => ({
+        items={offlineData.map(shop => ({
           key: shop.name,
           label: <CustomTab data={shop} currentTabKey={activeKey} />,
           children: (
             <div
               style={{
                 padding: '0 24px',
-              }}
-            >
+              }}>
               <Line
                 height={400}
                 data={offlineChartData}
@@ -94,6 +90,6 @@ const OfflineData = ({
         }))}
       />
     </Card>
-  );
-};
-export default OfflineData;
+  )
+}
+export default OfflineData

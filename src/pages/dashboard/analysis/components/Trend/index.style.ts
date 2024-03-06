@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -26,7 +26,7 @@ const useStyles = createStyles(({ token }) => {
       up: { color: token['green-6'] },
       down: { color: token['red-6'] },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

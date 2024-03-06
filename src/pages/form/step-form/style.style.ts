@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(() => {
   return {
@@ -10,6 +10,6 @@ const useStyles = createStyles(() => {
       margin: '0 auto',
       padding: '24px 0 8px',
     },
-  };
-});
-export default useStyles;
+  }
+})
+export default useStyles

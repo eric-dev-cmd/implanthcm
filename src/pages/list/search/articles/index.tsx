@@ -1,44 +1,44 @@
-import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
-import type { FC } from 'react';
-import React, { useMemo } from 'react';
-import { categoryOptions } from '../../mock';
-import ArticleListContent from './components/ArticleListContent';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import type { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
-import useStyles from './style.style';
+import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons'
+import { useRequest } from '@umijs/max'
+import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd'
+import { DefaultOptionType } from 'antd/es/select'
+import type { FC } from 'react'
+import React, { useMemo } from 'react'
+import { categoryOptions } from '../../mock'
+import ArticleListContent from './components/ArticleListContent'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import type { ListItemDataType } from './data.d'
+import { queryFakeList } from './service'
+import useStyles from './style.style'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
-const pageSize = 5;
+const pageSize = 5
 
 const Articles: FC = () => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
 
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   const { data, reload, loading, loadMore, loadingMore } = useRequest(
     () => {
       return queryFakeList({
         count: pageSize,
-      });
+      })
     },
     {
       loadMore: true,
     },
-  );
+  )
 
-  const list = data?.list || [];
+  const list = data?.list || []
 
   const setOwner = () => {
     form.setFieldsValue({
       owner: ['wzj'],
-    });
-  };
+    })
+  }
 
   const owners = [
     {
@@ -61,11 +61,11 @@ const Articles: FC = () => {
       id: 'ym',
       name: '姚明',
     },
-  ];
+  ]
 
   const IconText: React.FC<{
-    type: string;
-    text: React.ReactNode;
+    type: string
+    text: React.ReactNode
   }> = ({ type, text }) => {
     switch (type) {
       case 'star-o':
@@ -74,25 +74,25 @@ const Articles: FC = () => {
             <StarOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       case 'like-o':
         return (
           <span>
             <LikeOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       case 'message':
         return (
           <span>
             <MessageOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   const formItemLayout = {
     wrapperCol: {
@@ -100,7 +100,7 @@ const Articles: FC = () => {
       sm: { span: 24 },
       md: { span: 12 },
     },
-  };
+  }
 
   const loadMoreDom = list.length > 0 && (
     <div style={{ textAlign: 'center', marginTop: 16 }}>
@@ -114,16 +114,16 @@ const Articles: FC = () => {
         )}
       </Button>
     </div>
-  );
+  )
 
   const ownerOptions = useMemo<DefaultOptionType[]>(
     () =>
-      owners.map((item) => ({
+      owners.map(item => ({
         label: item.name,
         value: item.id,
       })),
     [owners],
-  );
+  )
 
   return (
     <>
@@ -134,12 +134,11 @@ const Articles: FC = () => {
           initialValues={{
             owner: ['wjh', 'zxx'],
           }}
-          onValuesChange={reload}
-        >
+          onValuesChange={reload}>
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
             <FormItem name="category">
               <TagSelect expandable>
-                {categoryOptions.map((category) => (
+                {categoryOptions.map(category => (
                   <TagSelect.Option value={category.value!} key={category.value}>
                     {category.label}
                   </TagSelect.Option>
@@ -197,8 +196,7 @@ const Articles: FC = () => {
       <Card
         style={{ marginTop: 24 }}
         bordered={false}
-        bodyStyle={{ padding: '8px 32px 32px 32px' }}
-      >
+        bodyStyle={{ padding: '8px 32px 32px 32px' }}>
         <List<ListItemDataType>
           size="large"
           loading={loading}
@@ -206,7 +204,7 @@ const Articles: FC = () => {
           itemLayout="vertical"
           loadMore={loadMoreDom}
           dataSource={list}
-          renderItem={(item) => (
+          renderItem={item => (
             <List.Item
               key={item.id}
               actions={[
@@ -214,8 +212,7 @@ const Articles: FC = () => {
                 <IconText key="like" type="like-o" text={item.like} />,
                 <IconText key="message" type="message" text={item.message} />,
               ]}
-              extra={<div className={styles.listItemExtra} />}
-            >
+              extra={<div className={styles.listItemExtra} />}>
               <List.Item.Meta
                 title={
                   <a className={styles.listItemMetaTitle} href={item.href}>
@@ -236,7 +233,7 @@ const Articles: FC = () => {
         />
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default Articles;
+export default Articles

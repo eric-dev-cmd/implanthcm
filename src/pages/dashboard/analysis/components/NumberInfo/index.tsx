@@ -1,18 +1,18 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
-import React from 'react';
-import useStyles from './index.style';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
+import classNames from 'classnames'
+import React from 'react'
+import useStyles from './index.style'
 export type NumberInfoProps = {
-  title?: React.ReactNode | string;
-  subTitle?: React.ReactNode | string;
-  total?: React.ReactNode | string;
-  status?: 'up' | 'down';
-  theme?: string;
-  gap?: number;
-  subTotal?: number;
-  suffix?: string;
-  style?: React.CSSProperties;
-};
+  title?: React.ReactNode | string
+  subTitle?: React.ReactNode | string
+  total?: React.ReactNode | string
+  status?: 'up' | 'down'
+  theme?: string
+  gap?: number
+  subTotal?: number
+  suffix?: string
+  style?: React.CSSProperties
+}
 const NumberInfo: React.FC<NumberInfoProps> = ({
   theme,
   title,
@@ -24,14 +24,13 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
   gap,
   ...rest
 }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <div
       className={classNames(styles.numberInfo, {
         [styles[`numberInfo${theme}`]]: theme,
       })}
-      {...rest}
-    >
+      {...rest}>
       {title && (
         <div className={styles.numberInfoTitle} title={typeof title === 'string' ? title : ''}>
           {title}
@@ -40,8 +39,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
       {subTitle && (
         <div
           className={styles.numberInfoSubTitle}
-          title={typeof subTitle === 'string' ? subTitle : ''}
-        >
+          title={typeof subTitle === 'string' ? subTitle : ''}>
           {subTitle}
         </div>
       )}
@@ -53,8 +51,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
                 marginTop: gap,
               }
             : {}
-        }
-      >
+        }>
         <span>
           {total}
           {suffix && <em className={styles.suffix}>{suffix}</em>}
@@ -67,6 +64,6 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
         )}
       </div>
     </div>
-  );
-};
-export default NumberInfo;
+  )
+}
+export default NumberInfo

@@ -1,12 +1,12 @@
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import { Badge, Card, Descriptions, Divider } from 'antd';
-import type { FC } from 'react';
-import React from 'react';
-import type { BasicGood, BasicProgress } from './data.d';
-import { queryBasicProfile } from './service';
-import useStyles from './style.style';
+import type { ProColumns } from '@ant-design/pro-components'
+import { PageContainer, ProTable } from '@ant-design/pro-components'
+import { useRequest } from '@umijs/max'
+import { Badge, Card, Descriptions, Divider } from 'antd'
+import type { FC } from 'react'
+import React from 'react'
+import type { BasicGood, BasicProgress } from './data.d'
+import { queryBasicProfile } from './service'
+import useStyles from './style.style'
 const progressColumns: ProColumns<BasicProgress>[] = [
   {
     title: '时间',
@@ -24,9 +24,9 @@ const progressColumns: ProColumns<BasicProgress>[] = [
     key: 'status',
     render: (text: React.ReactNode) => {
       if (text === 'success') {
-        return <Badge status="success" text="成功" />;
+        return <Badge status="success" text="成功" />
       }
-      return <Badge status="processing" text="进行中" />;
+      return <Badge status="processing" text="进行中" />
     },
   },
   {
@@ -39,45 +39,45 @@ const progressColumns: ProColumns<BasicProgress>[] = [
     dataIndex: 'cost',
     key: 'cost',
   },
-];
+]
 const Basic: FC = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const { data, loading } = useRequest(() => {
-    return queryBasicProfile();
-  });
+    return queryBasicProfile()
+  })
   const { basicGoods, basicProgress } = data || {
     basicGoods: [],
     basicProgress: [],
-  };
-  let goodsData: typeof basicGoods = [];
+  }
+  let goodsData: typeof basicGoods = []
   if (basicGoods.length) {
-    let num = 0;
-    let amount = 0;
-    basicGoods.forEach((item) => {
-      num += Number(item.num);
-      amount += Number(item.amount);
-    });
+    let num = 0
+    let amount = 0
+    basicGoods.forEach(item => {
+      num += Number(item.num)
+      amount += Number(item.amount)
+    })
     goodsData = basicGoods.concat({
       id: '总计',
       num,
       amount,
-    });
+    })
   }
   const renderContent = (value: any, _: any, index: any) => {
     const obj: {
-      children: any;
+      children: any
       props: {
-        colSpan?: number;
-      };
+        colSpan?: number
+      }
     } = {
       children: value,
       props: {},
-    };
-    if (index === basicGoods.length) {
-      obj.props.colSpan = 0;
     }
-    return obj;
-  };
+    if (index === basicGoods.length) {
+      obj.props.colSpan = 0
+    }
+    return obj
+  }
   const goodsColumns: ProColumns<BasicGood>[] = [
     {
       title: '商品编号',
@@ -85,22 +85,21 @@ const Basic: FC = () => {
       key: 'id',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
-          return <span>{text}</span>;
+          return <span>{text}</span>
         }
         return {
           children: (
             <span
               style={{
                 fontWeight: 600,
-              }}
-            >
+              }}>
               总计
             </span>
           ),
           props: {
             colSpan: 4,
           },
-        };
+        }
       },
     },
     {
@@ -129,17 +128,16 @@ const Basic: FC = () => {
       align: 'right' as 'left' | 'right' | 'center',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
-          return text;
+          return text
         }
         return (
           <span
             style={{
               fontWeight: 600,
-            }}
-          >
+            }}>
             {text}
           </span>
-        );
+        )
       },
     },
     {
@@ -149,20 +147,19 @@ const Basic: FC = () => {
       align: 'right' as 'left' | 'right' | 'center',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
-          return text;
+          return text
         }
         return (
           <span
             style={{
               fontWeight: 600,
-            }}
-          >
+            }}>
             {text}
           </span>
-        );
+        )
       },
     },
-  ];
+  ]
   return (
     <PageContainer>
       <Card bordered={false}>
@@ -170,8 +167,7 @@ const Basic: FC = () => {
           title="退款申请"
           style={{
             marginBottom: 32,
-          }}
-        >
+          }}>
           <Descriptions.Item label="取货单号">1000000000</Descriptions.Item>
           <Descriptions.Item label="状态">已取货</Descriptions.Item>
           <Descriptions.Item label="销售单号">1234123421</Descriptions.Item>
@@ -186,8 +182,7 @@ const Basic: FC = () => {
           title="用户信息"
           style={{
             marginBottom: 32,
-          }}
-        >
+          }}>
           <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
           <Descriptions.Item label="联系电话">18100000000</Descriptions.Item>
           <Descriptions.Item label="常用快递">菜鸟仓储</Descriptions.Item>
@@ -228,6 +223,6 @@ const Basic: FC = () => {
         />
       </Card>
     </PageContainer>
-  );
-};
-export default Basic;
+  )
+}
+export default Basic

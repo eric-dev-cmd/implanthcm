@@ -1,20 +1,20 @@
-import { Avatar } from 'antd';
-import dayjs from 'dayjs';
-import React from 'react';
-import useStyles from './index.style';
+import { Avatar } from 'antd'
+import dayjs from 'dayjs'
+import React from 'react'
+import useStyles from './index.style'
 export type ApplicationsProps = {
   data: {
-    content?: string;
-    updatedAt?: any;
-    avatar?: string;
-    owner?: string;
-    href?: string;
-  };
-};
+    content?: string
+    updatedAt?: any
+    avatar?: string
+    owner?: string
+    href?: string
+  }
+}
 const ArticleListContent: React.FC<ApplicationsProps> = ({
   data: { content, updatedAt, avatar, owner, href },
 }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <div>
       <div className={styles.description}>{content}</div>
@@ -24,6 +24,6 @@ const ArticleListContent: React.FC<ApplicationsProps> = ({
         <em>{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
       </div>
     </div>
-  );
-};
-export default ArticleListContent;
+  )
+}
+export default ArticleListContent

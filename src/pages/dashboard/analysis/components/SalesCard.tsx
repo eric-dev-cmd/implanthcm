@@ -1,24 +1,24 @@
-import { Column } from '@ant-design/plots';
-import { Card, Col, DatePicker, Row, Tabs } from 'antd';
-import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
-import type dayjs from 'dayjs';
-import numeral from 'numeral';
-import type { DataItem } from '../data.d';
-import useStyles from '../style.style';
+import { Column } from '@ant-design/plots'
+import { Card, Col, DatePicker, Row, Tabs } from 'antd'
+import type { RangePickerProps } from 'antd/es/date-picker/generatePicker'
+import type dayjs from 'dayjs'
+import numeral from 'numeral'
+import type { DataItem } from '../data.d'
+import useStyles from '../style.style'
 
-export type TimeType = 'today' | 'week' | 'month' | 'year';
-const { RangePicker } = DatePicker;
+export type TimeType = 'today' | 'week' | 'month' | 'year'
+const { RangePicker } = DatePicker
 
 const rankingListData: {
-  title: string;
-  total: number;
-}[] = [];
+  title: string
+  total: number
+}[] = []
 
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: `工专路 ${i} 号店`,
     total: 323234,
-  });
+  })
 }
 
 const SalesCard = ({
@@ -29,22 +29,21 @@ const SalesCard = ({
   loading,
   selectDate,
 }: {
-  rangePickerValue: RangePickerProps<dayjs.Dayjs>['value'];
-  isActive: (key: TimeType) => string;
-  salesData: DataItem[];
-  loading: boolean;
-  handleRangePickerChange: RangePickerProps<dayjs.Dayjs>['onChange'];
-  selectDate: (key: TimeType) => void;
+  rangePickerValue: RangePickerProps<dayjs.Dayjs>['value']
+  isActive: (key: TimeType) => string
+  salesData: DataItem[]
+  loading: boolean
+  handleRangePickerChange: RangePickerProps<dayjs.Dayjs>['onChange']
+  selectDate: (key: TimeType) => void
 }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <Card
       loading={loading}
       bordered={false}
       bodyStyle={{
         padding: 0,
-      }}
-    >
+      }}>
       <div className={styles.salesCard}>
         <Tabs
           tabBarExtraContent={
@@ -119,8 +118,7 @@ const SalesCard = ({
                             <span
                               className={`${styles.rankingItemNumber} ${
                                 i < 3 ? styles.rankingItemNumberActive : ''
-                              }`}
-                            >
+                              }`}>
                               {i + 1}
                             </span>
                             <span className={styles.rankingItemTitle} title={item.title}>
@@ -175,8 +173,7 @@ const SalesCard = ({
                             <span
                               className={`${
                                 i < 3 ? styles.rankingItemNumberActive : styles.rankingItemNumber
-                              }`}
-                            >
+                              }`}>
                               {i + 1}
                             </span>
                             <span className={styles.rankingItemTitle} title={item.title}>
@@ -195,6 +192,6 @@ const SalesCard = ({
         />
       </div>
     </Card>
-  );
-};
-export default SalesCard;
+  )
+}
+export default SalesCard

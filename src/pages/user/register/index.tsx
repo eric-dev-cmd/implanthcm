@@ -1,66 +1,66 @@
-import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { history, Link, useRequest } from '@umijs/max';
-import { Button, Form, Input, Tabs, message } from 'antd';
-import type { Store } from 'antd/es/form/interface';
-import type { FC } from 'react';
-import { useEffect } from 'react';
-import type { StateType } from './service';
-import { fakeRegister } from './service';
-import useStyles from './style.style';
-const FormItem = Form.Item;
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
+import { history, Link, useRequest } from '@umijs/max'
+import { Button, Form, Input, message, Tabs } from 'antd'
+import type { Store } from 'antd/es/form/interface'
+import type { FC } from 'react'
+import { useEffect } from 'react'
+import type { StateType } from './service'
+import { fakeRegister } from './service'
+import useStyles from './style.style'
+const FormItem = Form.Item
 
 const Register: FC = () => {
-  const { styles } = useStyles();
-  const confirmDirty = false;
-  let interval: number | undefined;
+  const { styles } = useStyles()
+  const confirmDirty = false
+  let interval: number | undefined
 
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   useEffect(
     () => () => {
-      clearInterval(interval);
+      clearInterval(interval)
     },
     [interval],
-  );
+  )
 
   const { loading: submitting, run: register } = useRequest<{
-    data: StateType;
+    data: StateType
   }>(fakeRegister, {
     manual: true,
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
-        message.success('注册成功！');
+        message.success('注册成功！')
         history.push({
           pathname: `/user/register-result?account=${params[0].email}`,
-        });
+        })
       }
     },
-  });
+  })
 
   const onFinish = (values: Store) => {
-    register(values);
-  };
+    register(values)
+  }
 
   const checkConfirm = (_: any, value: string) => {
-    const promise = Promise;
+    const promise = Promise
     if (value && value !== form.getFieldValue('password')) {
-      return promise.reject('Mật khẩu không khớp!');
+      return promise.reject('Mật khẩu không khớp!')
     }
-    return promise.resolve();
-  };
+    return promise.resolve()
+  }
 
   const checkPassword = (_: any, value: string) => {
-    const promise = Promise;
+    const promise = Promise
     if (!value) {
-      return promise.reject('Hãy nhập mật khẩu!');
+      return promise.reject('Hãy nhập mật khẩu!')
     }
     if (value.length < 6) {
-      return promise.reject('');
+      return promise.reject('')
     }
     if (value && confirmDirty) {
-      form.validateFields(['confirm']);
+      form.validateFields(['confirm'])
     }
-    return promise.resolve();
-  };
+    return promise.resolve()
+  }
 
   return (
     <div className={styles.container}>
@@ -84,8 +84,7 @@ const Register: FC = () => {
                 required: true,
                 message: 'Hãy nhập username!',
               },
-            ]}
-          >
+            ]}>
             <Input size="large" prefix={<UserOutlined />} placeholder="Username" />
           </FormItem>
 
@@ -100,8 +99,7 @@ const Register: FC = () => {
               {
                 validator: checkPassword,
               },
-            ]}
-          >
+            ]}>
             <Input
               size="large"
               type="password"
@@ -119,8 +117,7 @@ const Register: FC = () => {
               {
                 validator: checkConfirm,
               },
-            ]}
-          >
+            ]}>
             <Input
               size="large"
               type="password"
@@ -139,8 +136,7 @@ const Register: FC = () => {
                 type: 'email',
                 message: 'Email không hợp lệ!',
               },
-            ]}
-          >
+            ]}>
             <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
           </FormItem>
           <FormItem>
@@ -150,8 +146,7 @@ const Register: FC = () => {
                 loading={submitting}
                 className={styles.submit}
                 type="primary"
-                htmlType="submit"
-              >
+                htmlType="submit">
                 <span>Đăng ký</span>
               </Button>
             </div>
@@ -160,8 +155,7 @@ const Register: FC = () => {
             style={{
               marginTop: 50,
               textAlign: 'center',
-            }}
-          >
+            }}>
             <div style={{ fontSize: 14 }}>Hoặc</div>
             <Link to="/user/login">
               <Button
@@ -170,8 +164,7 @@ const Register: FC = () => {
                 // className={styles.submit}
                 type="text"
                 htmlType="submit"
-                style={{ marginTop: 10, fontWeight: 'bold' }}
-              >
+                style={{ marginTop: 10, fontWeight: 'bold' }}>
                 <span>Đăng nhập</span>
               </Button>
             </Link>
@@ -179,7 +172,7 @@ const Register: FC = () => {
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

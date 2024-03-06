@@ -1,20 +1,19 @@
-import { DingdingOutlined } from '@ant-design/icons';
-import { GridContent } from '@ant-design/pro-components';
-import { Button, Card, Descriptions, Result, Steps } from 'antd';
-import { Fragment } from 'react';
-import useStyles from './index.style';
+import { DingdingOutlined } from '@ant-design/icons'
+import { GridContent } from '@ant-design/pro-components'
+import { Button, Card, Descriptions, Result, Steps } from 'antd'
+import { Fragment } from 'react'
+import useStyles from './index.style'
 
-const { Step } = Steps;
+const { Step } = Steps
 
 export default () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const desc1 = (
     <div className={styles.title}>
       <div
         style={{
           margin: '8px 0 4px',
-        }}
-      >
+        }}>
         <span>曲丽丽</span>
         <DingdingOutlined
           style={{
@@ -25,19 +24,17 @@ export default () => {
       </div>
       <div>2016-12-12 12:32</div>
     </div>
-  );
+  )
   const desc2 = (
     <div
       style={{
         fontSize: 12,
       }}
-      className={styles.title}
-    >
+      className={styles.title}>
       <div
         style={{
           margin: '8px 0 4px',
-        }}
-      >
+        }}>
         <span>周毛毛</span>
         <a href="">
           <DingdingOutlined
@@ -50,7 +47,7 @@ export default () => {
         </a>
       </div>
     </div>
-  );
+  )
   const content = (
     <>
       <Descriptions title="项目名称">
@@ -65,8 +62,7 @@ export default () => {
             <span
               style={{
                 fontSize: 14,
-              }}
-            >
+              }}>
               创建项目
             </span>
           }
@@ -77,8 +73,7 @@ export default () => {
             <span
               style={{
                 fontSize: 14,
-              }}
-            >
+              }}>
               部门初审
             </span>
           }
@@ -89,8 +84,7 @@ export default () => {
             <span
               style={{
                 fontSize: 14,
-              }}
-            >
+              }}>
               财务复核
             </span>
           }
@@ -100,22 +94,21 @@ export default () => {
             <span
               style={{
                 fontSize: 14,
-              }}
-            >
+              }}>
               完成
             </span>
           }
         />
       </Steps>
     </>
-  );
+  )
   const extra = (
     <Fragment>
       <Button type="primary">返回列表</Button>
       <Button>查看项目</Button>
       <Button>打印</Button>
     </Fragment>
-  );
+  )
   return (
     <GridContent>
       <Card bordered={false}>
@@ -126,11 +119,10 @@ export default () => {
           extra={extra}
           style={{
             marginBottom: 16,
-          }}
-        >
+          }}>
           {content}
         </Result>
       </Card>
     </GridContent>
-  );
-};
+  )
+}

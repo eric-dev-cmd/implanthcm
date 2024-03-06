@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -10,7 +10,7 @@ const useStyles = createStyles(({ token }) => {
         height: 'auto',
       },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

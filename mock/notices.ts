@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response } from 'express'
 
 const getNotices = (req: Request, res: Response) => {
   res.json({
@@ -107,9 +107,9 @@ const getNotices = (req: Request, res: Response) => {
         type: 'event',
       },
     ],
-  });
-};
+  })
+}
 
 export default {
   'GET /api/notices': getNotices,
-};
+}

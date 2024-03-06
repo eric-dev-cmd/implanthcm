@@ -1,11 +1,11 @@
-import { Pie } from '@ant-design/plots';
-import { Card, Radio, Typography } from 'antd';
-import type { RadioChangeEvent } from 'antd/es/radio';
-import numeral from 'numeral';
-import React from 'react';
-import type { DataItem } from '../data.d';
-import useStyles from '../style.style';
-const { Text } = Typography;
+import { Pie } from '@ant-design/plots'
+import { Card, Radio, Typography } from 'antd'
+import type { RadioChangeEvent } from 'antd/es/radio'
+import numeral from 'numeral'
+import React from 'react'
+import type { DataItem } from '../data.d'
+import useStyles from '../style.style'
+const { Text } = Typography
 const ProportionSales = ({
   dropdownGroup,
   salesType,
@@ -13,13 +13,13 @@ const ProportionSales = ({
   salesPieData,
   handleChangeSalesType,
 }: {
-  loading: boolean;
-  dropdownGroup: React.ReactNode;
-  salesType: 'all' | 'online' | 'stores';
-  salesPieData: DataItem[];
-  handleChangeSalesType?: (e: RadioChangeEvent) => void;
+  loading: boolean
+  dropdownGroup: React.ReactNode
+  salesType: 'all' | 'online' | 'stores'
+  salesPieData: DataItem[]
+  handleChangeSalesType?: (e: RadioChangeEvent) => void
 }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <Card
       loading={loading}
@@ -40,8 +40,7 @@ const ProportionSales = ({
             </Radio.Group>
           </div>
         </div>
-      }
-    >
+      }>
       <div>
         <Text>销售额</Text>
         <Pie
@@ -55,12 +54,12 @@ const ProportionSales = ({
           label={{
             position: 'spider',
             text: (item: { x: number; y: number }) => {
-              return `${item.x}: ${numeral(item.y).format('0,0')}`;
+              return `${item.x}: ${numeral(item.y).format('0,0')}`
             },
           }}
         />
       </div>
     </Card>
-  );
-};
-export default ProportionSales;
+  )
+}
+export default ProportionSales

@@ -3,18 +3,18 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
-import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
-import numeral from 'numeral';
-import React from 'react';
-import type { ListItemDataType } from '../../data.d';
-import { queryFakeList } from '../../service';
-import useStyles from './index.style';
+} from '@ant-design/icons'
+import { useRequest } from '@umijs/max'
+import { Avatar, Card, Dropdown, List, Tooltip } from 'antd'
+import numeral from 'numeral'
+import React from 'react'
+import type { ListItemDataType } from '../../data.d'
+import { queryFakeList } from '../../service'
+import useStyles from './index.style'
 export function formatWan(val: number) {
-  const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
-  let result: React.ReactNode = val;
+  const v = val * 1
+  if (!v || Number.isNaN(v)) return ''
+  let result: React.ReactNode = val
   if (val > 10000) {
     result = (
       <span>
@@ -26,27 +26,26 @@ export function formatWan(val: number) {
             fontSize: 14,
             fontStyle: 'normal',
             marginLeft: 2,
-          }}
-        >
+          }}>
           万
         </span>
       </span>
-    );
+    )
   }
-  return result;
+  return result
 }
 const Applications: React.FC = () => {
-  const { styles: stylesApplications } = useStyles();
+  const { styles: stylesApplications } = useStyles()
   // 获取tab列表数据
   const { data: listData } = useRequest(() => {
     return queryFakeList({
       count: 30,
-    });
-  });
+    })
+  })
 
   const CardInfo: React.FC<{
-    activeUser: React.ReactNode;
-    newUser: React.ReactNode;
+    activeUser: React.ReactNode
+    newUser: React.ReactNode
   }> = ({ activeUser, newUser }) => (
     <div className={stylesApplications.cardInfo}>
       <div>
@@ -58,7 +57,7 @@ const Applications: React.FC = () => {
         <p>{newUser}</p>
       </div>
     </div>
-  );
+  )
   return (
     <List<ListItemDataType>
       rowKey="id"
@@ -73,7 +72,7 @@ const Applications: React.FC = () => {
         xs: 1,
       }}
       dataSource={listData?.list || []}
-      renderItem={(item) => (
+      renderItem={item => (
         <List.Item key={item.id}>
           <Card
             hoverable
@@ -101,12 +100,10 @@ const Applications: React.FC = () => {
                     title: '2nd menu item',
                   },
                 ]}
-                key="ellipsis"
-              >
+                key="ellipsis">
                 <EllipsisOutlined />
               </Dropdown>,
-            ]}
-          >
+            ]}>
             <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
             <div>
               <CardInfo
@@ -118,6 +115,6 @@ const Applications: React.FC = () => {
         </List.Item>
       )}
     />
-  );
-};
-export default Applications;
+  )
+}
+export default Applications

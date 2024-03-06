@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -42,7 +42,7 @@ const useStyles = createStyles(({ token }) => {
     editable: {
       td: { paddingTop: '13px', paddingBottom: '12.5px' },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

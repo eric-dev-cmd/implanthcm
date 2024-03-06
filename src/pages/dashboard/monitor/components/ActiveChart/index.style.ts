@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(() => {
   return {
@@ -37,6 +37,6 @@ const useStyles = createStyles(() => {
     'dashedLine:last-child': {
       top: '-36px',
     },
-  };
-});
-export default useStyles;
+  }
+})
+export default useStyles

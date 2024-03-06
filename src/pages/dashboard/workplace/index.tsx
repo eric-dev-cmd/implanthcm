@@ -1,15 +1,15 @@
-import { Radar } from '@ant-design/plots';
-import { PageContainer } from '@ant-design/pro-components';
-import { Link, useRequest } from '@umijs/max';
-import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import type { FC } from 'react';
-import EditableLinkGroup from './components/EditableLinkGroup';
-import type { ActivitiesType, CurrentUser } from './data.d';
-import { fakeChartData, queryActivities, queryProjectNotice } from './service';
-import useStyles from './style.style';
-dayjs.extend(relativeTime);
+import { Radar } from '@ant-design/plots'
+import { PageContainer } from '@ant-design/pro-components'
+import { Link, useRequest } from '@umijs/max'
+import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import type { FC } from 'react'
+import EditableLinkGroup from './components/EditableLinkGroup'
+import type { ActivitiesType, CurrentUser } from './data.d'
+import { fakeChartData, queryActivities, queryProjectNotice } from './service'
+import useStyles from './style.style'
+dayjs.extend(relativeTime)
 
 const links = [
   {
@@ -36,12 +36,12 @@ const links = [
     title: '操作六',
     href: '',
   },
-];
+]
 const PageHeaderContent: FC<{
-  currentUser: Partial<CurrentUser>;
+  currentUser: Partial<CurrentUser>
 }> = ({ currentUser }) => {
-  const { styles } = useStyles();
-  const loading = currentUser && Object.keys(currentUser).length;
+  const { styles } = useStyles()
+  const loading = currentUser && Object.keys(currentUser).length
   if (!loading) {
     return (
       <Skeleton
@@ -51,7 +51,7 @@ const PageHeaderContent: FC<{
         }}
         active
       />
-    );
+    )
   }
   return (
     <div className={styles.pageHeaderContent}>
@@ -69,10 +69,10 @@ const PageHeaderContent: FC<{
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 const ExtraContent: FC<Record<string, any>> = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <div className={styles.extraContent}>
       <div className={styles.statItem}>
@@ -85,25 +85,25 @@ const ExtraContent: FC<Record<string, any>> = () => {
         <Statistic title="项目访问" value={2223} />
       </div>
     </div>
-  );
-};
+  )
+}
 const Workplace: FC = () => {
-  const { styles } = useStyles();
-  const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice);
-  const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities);
-  const { data } = useRequest(fakeChartData);
+  const { styles } = useStyles()
+  const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice)
+  const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities)
+  const { data } = useRequest(fakeChartData)
   const renderActivities = (item: ActivitiesType) => {
-    const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
+    const events = item.template.split(/@\{([^{}]*)\}/gi).map(key => {
       if (item[key as keyof ActivitiesType]) {
-        const value = item[key as 'user'];
+        const value = item[key as 'user']
         return (
           <a href={value?.link} key={value?.name}>
             {value.name}
           </a>
-        );
+        )
       }
-      return key;
-    });
+      return key
+    })
     return (
       <List.Item key={item.id}>
         <List.Item.Meta
@@ -122,8 +122,8 @@ const Workplace: FC = () => {
           }
         />
       </List.Item>
-    );
-  };
+    )
+  }
 
   return (
     <PageContainer
@@ -140,8 +140,7 @@ const Workplace: FC = () => {
           }}
         />
       }
-      extraContent={<ExtraContent />}
-    >
+      extraContent={<ExtraContent />}>
       <Row gutter={24}>
         <Col xl={16} lg={24} md={24} sm={24} xs={24}>
           <Card
@@ -155,16 +154,14 @@ const Workplace: FC = () => {
             loading={projectLoading}
             bodyStyle={{
               padding: 0,
-            }}
-          >
-            {projectNotice.map((item) => (
+            }}>
+            {projectNotice.map(item => (
               <Card.Grid className={styles.projectGrid} key={item.id}>
                 <Card
                   bodyStyle={{
                     padding: 0,
                   }}
-                  bordered={false}
-                >
+                  bordered={false}>
                   <Card.Meta
                     title={
                       <div className={styles.cardTitle}>
@@ -193,11 +190,10 @@ const Workplace: FC = () => {
             bordered={false}
             className={styles.activeCard}
             title="动态"
-            loading={activitiesLoading}
-          >
+            loading={activitiesLoading}>
             <List<ActivitiesType>
               loading={activitiesLoading}
-              renderItem={(item) => renderActivities(item)}
+              renderItem={item => renderActivities(item)}
               dataSource={activities}
               className={styles.activitiesList}
               size="large"
@@ -213,8 +209,7 @@ const Workplace: FC = () => {
             bordered={false}
             bodyStyle={{
               padding: 0,
-            }}
-          >
+            }}>
             <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
           </Card>
           <Card
@@ -223,8 +218,7 @@ const Workplace: FC = () => {
             }}
             bordered={false}
             title="XX 指数"
-            loading={data?.radarData?.length === 0}
-          >
+            loading={data?.radarData?.length === 0}>
             <div>
               <Radar
                 height={343}
@@ -259,11 +253,10 @@ const Workplace: FC = () => {
             }}
             bordered={false}
             title="团队"
-            loading={projectLoading}
-          >
+            loading={projectLoading}>
             <div className={styles.members}>
               <Row gutter={48}>
-                {projectNotice.map((item) => {
+                {projectNotice.map(item => {
                   return (
                     <Col span={12} key={`members-item-${item.id}`}>
                       <a>
@@ -271,7 +264,7 @@ const Workplace: FC = () => {
                         <span className={styles.member}>{item.member.substring(0, 3)}</span>
                       </a>
                     </Col>
-                  );
+                  )
                 })}
               </Row>
             </div>
@@ -279,6 +272,6 @@ const Workplace: FC = () => {
         </Col>
       </Row>
     </PageContainer>
-  );
-};
-export default Workplace;
+  )
+}
+export default Workplace

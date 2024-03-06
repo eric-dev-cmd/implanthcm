@@ -1,11 +1,11 @@
-import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
-import { GridContent } from '@ant-design/pro-components';
-import { Button, Card, Result } from 'antd';
-import { Fragment } from 'react';
-import useStyles from './index.style';
+import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons'
+import { GridContent } from '@ant-design/pro-components'
+import { Button, Card, Result } from 'antd'
+import { Fragment } from 'react'
+import useStyles from './index.style'
 
 export default () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const Content = (
     <Fragment>
       <div className={styles.title}>
@@ -14,8 +14,7 @@ export default () => {
       <div
         style={{
           marginBottom: 16,
-        }}
-      >
+        }}>
         <CloseCircleOutlined
           style={{
             marginRight: 8,
@@ -26,8 +25,7 @@ export default () => {
         <a
           style={{
             marginLeft: 16,
-          }}
-        >
+          }}>
           <span>立即解冻</span>
           <RightOutlined />
         </a>
@@ -43,14 +41,13 @@ export default () => {
         <a
           style={{
             marginLeft: 16,
-          }}
-        >
+          }}>
           <span>立即升级</span>
           <RightOutlined />
         </a>
       </div>
     </Fragment>
-  );
+  )
   return (
     <GridContent>
       <Card bordered={false}>
@@ -66,11 +63,10 @@ export default () => {
           style={{
             marginTop: 48,
             marginBottom: 16,
-          }}
-        >
+          }}>
           {Content}
         </Result>
       </Card>
     </GridContent>
-  );
-};
+  )
+}

@@ -1,33 +1,33 @@
-import { PageLoading } from '@ant-design/pro-components';
-import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
-import * as React from 'react';
+import { PageLoading } from '@ant-design/pro-components'
+import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react'
+import * as React from 'react'
 
-const colors = ['#eff3ff', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594'];
+const colors = ['#eff3ff', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594']
 export default class Map extends React.Component {
   state = {
     data: null,
     grid: null,
     loading: false,
-  };
+  }
 
   public async componentDidMount() {
     const [geoData, gridData] = await Promise.all([
       fetch(
         'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
-      ).then((d) => d.json()),
+      ).then(d => d.json()),
       fetch(
         'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
-      ).then((d) => d.json()),
-    ]);
+      ).then(d => d.json()),
+    ])
     this.setState({
       data: geoData,
       grid: gridData,
       loading: true,
-    });
+    })
   }
 
   public render() {
-    const { data, grid, loading } = this.state;
+    const { data, grid, loading } = this.state
     return loading === false ? (
       <PageLoading />
     ) : (
@@ -42,8 +42,7 @@ export default class Map extends React.Component {
           position: 'relative',
           width: '100%',
           height: '452px',
-        }}
-      >
+        }}>
         {grid && (
           <HeatmapLayer
             key="1"
@@ -125,8 +124,8 @@ export default class Map extends React.Component {
             }}
             filter={{
               field: 'cum_conf',
-              values: (v) => {
-                return v > 2000;
+              values: v => {
+                return v > 2000
               },
             }}
             size={{
@@ -140,6 +139,6 @@ export default class Map extends React.Component {
           />,
         ]}
       </MapboxScene>
-    );
+    )
   }
 }

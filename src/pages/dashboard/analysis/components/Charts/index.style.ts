@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(() => {
   return {
@@ -18,6 +18,6 @@ const useStyles = createStyles(() => {
       left: '50%',
       marginLeft: '-7px',
     },
-  };
-});
-export default useStyles;
+  }
+})
+export default useStyles

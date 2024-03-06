@@ -1,44 +1,39 @@
-import { removeRule, rule } from '@/services/ant-design-pro/api';
-import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
-import {
-  FooterToolbar,
-  PageContainer,
-  ProDescriptions,
-  ProTable,
-} from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
-import { Button, Drawer, Input, message } from 'antd';
-import React, { useCallback, useRef, useState } from 'react';
-import CreateForm from './components/CreateForm';
-import UpdateForm from './components/UpdateForm';
+import { removeRule, rule } from '@/services/ant-design-pro/api'
+import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components'
+import { FooterToolbar, PageContainer, ProDescriptions, ProTable } from '@ant-design/pro-components'
+import { FormattedMessage, useIntl, useRequest } from '@umijs/max'
+import { Button, Drawer, Input, message } from 'antd'
+import React, { useCallback, useRef, useState } from 'react'
+import CreateForm from './components/CreateForm'
+import UpdateForm from './components/UpdateForm'
 
 const TableList: React.FC = () => {
-  const actionRef = useRef<ActionType>();
+  const actionRef = useRef<ActionType>()
 
-  const [showDetail, setShowDetail] = useState<boolean>(false);
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
-  const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
+  const [showDetail, setShowDetail] = useState<boolean>(false)
+  const [currentRow, setCurrentRow] = useState<API.RuleListItem>()
+  const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([])
 
   /**
    * @en-US International configuration
    * @zh-CN 国际化配置
    * */
-  const intl = useIntl();
+  const intl = useIntl()
 
-  const [messageApi, contextHolder] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage()
 
   const { run: delRun, loading } = useRequest(removeRule, {
     manual: true,
     onSuccess: () => {
-      setSelectedRows([]);
-      actionRef.current?.reloadAndRest?.();
+      setSelectedRows([])
+      actionRef.current?.reloadAndRest?.()
 
-      messageApi.success('Deleted successfully and will refresh soon');
+      messageApi.success('Deleted successfully and will refresh soon')
     },
     onError: () => {
-      messageApi.error('Delete failed, please try again');
+      messageApi.error('Delete failed, please try again')
     },
-  });
+  })
 
   const columns: ProColumns<API.RuleListItem>[] = [
     {
@@ -54,13 +49,12 @@ const TableList: React.FC = () => {
         return (
           <a
             onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
-            }}
-          >
+              setCurrentRow(entity)
+              setShowDetail(true)
+            }}>
             {dom}
           </a>
-        );
+        )
       },
     },
     {
@@ -132,9 +126,9 @@ const TableList: React.FC = () => {
       dataIndex: 'updatedAt',
       valueType: 'dateTime',
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
+        const status = form.getFieldValue('status')
         if (`${status}` === '0') {
-          return false;
+          return false
         }
         if (`${status}` === '3') {
           return (
@@ -145,9 +139,9 @@ const TableList: React.FC = () => {
                 defaultMessage: 'Please enter the reason for the exception!',
               })}
             />
-          );
+          )
         }
-        return defaultRender(item);
+        return defaultRender(item)
       },
     },
     {
@@ -173,7 +167,7 @@ const TableList: React.FC = () => {
         </a>,
       ],
     },
-  ];
+  ]
 
   /**
    *  Delete node
@@ -184,19 +178,19 @@ const TableList: React.FC = () => {
   const handleRemove = useCallback(
     async (selectedRows: API.RuleListItem[]) => {
       if (!selectedRows?.length) {
-        messageApi.warning('请选择删除项');
+        messageApi.warning('请选择删除项')
 
-        return;
+        return
       }
 
       await delRun({
         data: {
-          key: selectedRows.map((row) => row.key),
+          key: selectedRows.map(row => row.key),
         },
-      });
+      })
     },
     [delRun],
-  );
+  )
 
   return (
     <PageContainer>
@@ -216,7 +210,7 @@ const TableList: React.FC = () => {
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
+            setSelectedRows(selectedRows)
           },
         }}
       />
@@ -237,14 +231,12 @@ const TableList: React.FC = () => {
                 <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
               </span>
             </div>
-          }
-        >
+          }>
           <Button
             loading={loading}
             onClick={() => {
-              handleRemove(selectedRowsState);
-            }}
-          >
+              handleRemove(selectedRowsState)
+            }}>
             <FormattedMessage
               id="pages.searchTable.batchDeletion"
               defaultMessage="Batch deletion"
@@ -263,11 +255,10 @@ const TableList: React.FC = () => {
         width={600}
         open={showDetail}
         onClose={() => {
-          setCurrentRow(undefined);
-          setShowDetail(false);
+          setCurrentRow(undefined)
+          setShowDetail(false)
         }}
-        closable={false}
-      >
+        closable={false}>
         {currentRow?.name && (
           <ProDescriptions<API.RuleListItem>
             column={2}
@@ -283,7 +274,7 @@ const TableList: React.FC = () => {
         )}
       </Drawer>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default TableList;
+export default TableList

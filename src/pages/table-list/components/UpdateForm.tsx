@@ -1,4 +1,4 @@
-import { updateRule } from '@/services/ant-design-pro/api';
+import { updateRule } from '@/services/ant-design-pro/api'
 import {
   ProFormDateTimePicker,
   ProFormRadio,
@@ -6,61 +6,61 @@ import {
   ProFormText,
   ProFormTextArea,
   StepsForm,
-} from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
-import { message, Modal } from 'antd';
-import React, { cloneElement, useCallback, useState } from 'react';
+} from '@ant-design/pro-components'
+import { FormattedMessage, useIntl, useRequest } from '@umijs/max'
+import { message, Modal } from 'antd'
+import React, { cloneElement, useCallback, useState } from 'react'
 
 export type FormValueType = {
-  target?: string;
-  template?: string;
-  type?: string;
-  time?: string;
-  frequency?: string;
-} & Partial<API.RuleListItem>;
+  target?: string
+  template?: string
+  type?: string
+  time?: string
+  frequency?: string
+} & Partial<API.RuleListItem>
 
 export type UpdateFormProps = {
-  trigger?: JSX.Element;
-  onOk?: () => void;
-  values: Partial<API.RuleListItem>;
-};
+  trigger?: JSX.Element
+  onOk?: () => void
+  values: Partial<API.RuleListItem>
+}
 
-const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  const { onOk, values, trigger } = props;
+const UpdateForm: React.FC<UpdateFormProps> = props => {
+  const { onOk, values, trigger } = props
 
-  const intl = useIntl();
+  const intl = useIntl()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const [messageApi, contextHolder] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage()
 
   const { run } = useRequest(updateRule, {
     manual: true,
     onSuccess: () => {
-      messageApi.success('Configuration is successful');
-      onOk?.();
+      messageApi.success('Configuration is successful')
+      onOk?.()
     },
     onError: () => {
-      messageApi.error('Configuration failed, please try again!');
+      messageApi.error('Configuration failed, please try again!')
     },
-  });
+  })
 
   const onCancel = useCallback(() => {
-    setOpen(false);
-  }, []);
+    setOpen(false)
+  }, [])
 
   const onOpen = useCallback(() => {
-    setOpen(true);
-  }, []);
+    setOpen(true)
+  }, [])
 
   const onFinish = useCallback(
     async (values?: any) => {
-      await run({ data: values });
+      await run({ data: values })
 
-      onCancel();
+      onCancel()
     },
     [onCancel, run],
-  );
+  )
 
   return (
     <>
@@ -86,21 +86,18 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               })}
               open={open}
               footer={submitter}
-              onCancel={onCancel}
-            >
+              onCancel={onCancel}>
               {dom}
             </Modal>
-          );
+          )
         }}
-        onFinish={onFinish}
-      >
+        onFinish={onFinish}>
         <StepsForm.StepForm
           initialValues={values}
           title={intl.formatMessage({
             id: 'pages.searchTable.updateForm.basicConfig',
             defaultMessage: '基本信息',
-          })}
-        >
+          })}>
           <ProFormText
             name="name"
             label={intl.formatMessage({
@@ -153,8 +150,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           title={intl.formatMessage({
             id: 'pages.searchTable.updateForm.ruleProps.title',
             defaultMessage: '配置规则属性',
-          })}
-        >
+          })}>
           <ProFormSelect
             name="target"
             width="md"
@@ -205,8 +201,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           title={intl.formatMessage({
             id: 'pages.searchTable.updateForm.schedulingPeriod.title',
             defaultMessage: '设定调度周期',
-          })}
-        >
+          })}>
           <ProFormDateTimePicker
             name="time"
             width="md"
@@ -241,7 +236,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         </StepsForm.StepForm>
       </StepsForm>
     </>
-  );
-};
+  )
+}
 
-export default UpdateForm;
+export default UpdateForm

@@ -1,27 +1,27 @@
-import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
-import { GridContent } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import { Card, Col, Progress, Row, Statistic } from 'antd';
-import numeral from 'numeral';
-import type { FC } from 'react';
-import ActiveChart from './components/ActiveChart';
-import Map from './components/Map';
-import { queryTags } from './service';
-import useStyles from './style.style';
+import { Gauge, Liquid, WordCloud } from '@ant-design/plots'
+import { GridContent } from '@ant-design/pro-components'
+import { useRequest } from '@umijs/max'
+import { Card, Col, Progress, Row, Statistic } from 'antd'
+import numeral from 'numeral'
+import type { FC } from 'react'
+import ActiveChart from './components/ActiveChart'
+import Map from './components/Map'
+import { queryTags } from './service'
+import useStyles from './style.style'
 
-const { Countdown } = Statistic;
-const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
+const { Countdown } = Statistic
+const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30 // Moment is also OK
 
 const Monitor: FC = () => {
-  const { styles } = useStyles();
-  const { loading, data } = useRequest(queryTags);
-  const wordCloudData = (data?.list || []).map((item) => {
+  const { styles } = useStyles()
+  const { loading, data } = useRequest(queryTags)
+  const wordCloudData = (data?.list || []).map(item => {
     return {
       id: +Date.now(),
       word: item.name,
       weight: item.value,
-    };
-  });
+    }
+  })
   return (
     <GridContent>
       <>
@@ -34,8 +34,7 @@ const Monitor: FC = () => {
             xs={24}
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
                 <Col md={6} sm={12} xs={24}>
@@ -66,8 +65,7 @@ const Monitor: FC = () => {
               style={{
                 marginBottom: 24,
               }}
-              bordered={false}
-            >
+              bordered={false}>
               <ActiveChart />
             </Card>
             <Card
@@ -78,8 +76,7 @@ const Monitor: FC = () => {
               bodyStyle={{
                 textAlign: 'center',
               }}
-              bordered={false}
-            >
+              bordered={false}>
               <Gauge
                 height={180}
                 data={
@@ -111,14 +108,12 @@ const Monitor: FC = () => {
             xs={24}
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <Card title="各品类占比" bordered={false}>
               <Row
                 style={{
                   padding: '16px 0',
-                }}
-              >
+                }}>
                 <Col span={8}>
                   <Progress type="dashboard" percent={75} />
                 </Col>
@@ -138,16 +133,14 @@ const Monitor: FC = () => {
             xs={24}
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <Card
               title="热门搜索"
               loading={loading}
               bordered={false}
               bodyStyle={{
                 overflow: 'hidden',
-              }}
-            >
+              }}>
               <WordCloud
                 data={wordCloudData}
                 height={162}
@@ -164,22 +157,20 @@ const Monitor: FC = () => {
             xs={24}
             style={{
               marginBottom: 24,
-            }}
-          >
+            }}>
             <Card
               title="资源剩余"
               bodyStyle={{
                 textAlign: 'center',
                 fontSize: 0,
               }}
-              bordered={false}
-            >
+              bordered={false}>
               <Liquid height={160} percent={0.35} />
             </Card>
           </Col>
         </Row>
       </>
     </GridContent>
-  );
-};
-export default Monitor;
+  )
+}
+export default Monitor

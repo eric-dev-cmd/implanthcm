@@ -1,13 +1,13 @@
-import { List } from 'antd';
-import React from 'react';
+import { List } from 'antd'
+import React from 'react'
 
-type Unpacked<T> = T extends (infer U)[] ? U : T;
+type Unpacked<T> = T extends (infer U)[] ? U : T
 
 const passwordStrength = {
   strong: <span className="strong">强</span>,
   medium: <span className="medium">中</span>,
   weak: <span className="weak">弱 Weak</span>,
-};
+}
 
 const SecurityView: React.FC = () => {
   const getData = () => [
@@ -41,22 +41,22 @@ const SecurityView: React.FC = () => {
       description: '未绑定 MFA 设备，绑定后，可以进行二次确认',
       actions: [<a key="bind">绑定</a>],
     },
-  ];
+  ]
 
-  const data = getData();
+  const data = getData()
   return (
     <>
       <List<Unpacked<typeof data>>
         itemLayout="horizontal"
         dataSource={data}
-        renderItem={(item) => (
+        renderItem={item => (
           <List.Item actions={item.actions}>
             <List.Item.Meta title={item.title} description={item.description} />
           </List.Item>
         )}
       />
     </>
-  );
-};
+  )
+}
 
-export default SecurityView;
+export default SecurityView

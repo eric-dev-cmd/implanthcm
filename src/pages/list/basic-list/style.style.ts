@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from 'antd-style'
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -134,7 +134,7 @@ const useStyles = createStyles(({ token }) => {
       width: '100%',
       "[class^='title']": { marginBottom: '8px' },
     },
-  };
-});
+  }
+})
 
-export default useStyles;
+export default useStyles

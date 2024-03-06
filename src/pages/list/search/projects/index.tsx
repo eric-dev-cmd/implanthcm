@@ -1,30 +1,30 @@
-import { useRequest } from '@umijs/max';
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import type { FC } from 'react';
-import { categoryOptions } from '../../mock';
-import AvatarList from './components/AvatarList';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import type { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
-import useStyles from './style.style';
+import { useRequest } from '@umijs/max'
+import { Card, Col, Form, List, Row, Select, Typography } from 'antd'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import type { FC } from 'react'
+import { categoryOptions } from '../../mock'
+import AvatarList from './components/AvatarList'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import type { ListItemDataType } from './data.d'
+import { queryFakeList } from './service'
+import useStyles from './style.style'
 
-dayjs.extend(relativeTime);
+dayjs.extend(relativeTime)
 
-const FormItem = Form.Item;
-const { Paragraph } = Typography;
-const getKey = (id: string, index: number) => `${id}-${index}`;
+const FormItem = Form.Item
+const { Paragraph } = Typography
+const getKey = (id: string, index: number) => `${id}-${index}`
 const Projects: FC = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
+    console.log('form data', values)
     return queryFakeList({
       count: 8,
-    });
-  });
-  const list = data?.list || [];
+    })
+  })
+  const list = data?.list || []
   const cardList = list && (
     <List<ListItemDataType>
       rowKey="id"
@@ -39,7 +39,7 @@ const Projects: FC = () => {
         xxl: 4,
       }}
       dataSource={list}
-      renderItem={(item) => (
+      renderItem={item => (
         <List.Item>
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta
@@ -48,8 +48,7 @@ const Projects: FC = () => {
                 <Paragraph
                   ellipsis={{
                     rows: 2,
-                  }}
-                >
+                  }}>
                   {item.subDescription}
                 </Paragraph>
               }
@@ -72,7 +71,7 @@ const Projects: FC = () => {
         </List.Item>
       )}
     />
-  );
+  )
   const formItemLayout = {
     wrapperCol: {
       xs: {
@@ -82,7 +81,7 @@ const Projects: FC = () => {
         span: 16,
       },
     },
-  };
+  }
   return (
     <div className={styles.coverCardList}>
       <Card bordered={false}>
@@ -91,19 +90,17 @@ const Projects: FC = () => {
           onValuesChange={(_, values) => {
             // 表单项变化时请求数据
             // 模拟查询表单生效
-            run(values);
-          }}
-        >
+            run(values)
+          }}>
           <StandardFormRow
             title="所属类目"
             block
             style={{
               paddingBottom: 11,
-            }}
-          >
+            }}>
             <FormItem name="category">
               <TagSelect expandable>
-                {categoryOptions.map((category) => (
+                {categoryOptions.map(category => (
                   <TagSelect.Option value={category.value!} key={category.value}>
                     {category.label}
                   </TagSelect.Option>
@@ -157,6 +154,6 @@ const Projects: FC = () => {
       </Card>
       <div className={styles.cardList}>{cardList}</div>
     </div>
-  );
-};
-export default Projects;
+  )
+}
+export default Projects

@@ -8,23 +8,23 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import { Card, message } from 'antd';
-import type { FC } from 'react';
-import { fakeSubmitForm } from './service';
-import useStyles from './style.style';
+} from '@ant-design/pro-components'
+import { useRequest } from '@umijs/max'
+import { Card, message } from 'antd'
+import type { FC } from 'react'
+import { fakeSubmitForm } from './service'
+import useStyles from './style.style'
 const BasicForm: FC<Record<string, any>> = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const { run } = useRequest(fakeSubmitForm, {
     manual: true,
     onSuccess: () => {
-      message.success('提交成功');
+      message.success('提交成功')
     },
-  });
+  })
   const onFinish = async (values: Record<string, any>) => {
-    run(values);
-  };
+    run(values)
+  }
   return (
     <PageContainer content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
       <Card bordered={false}>
@@ -40,8 +40,7 @@ const BasicForm: FC<Record<string, any>> = () => {
           initialValues={{
             public: '1',
           }}
-          onFinish={onFinish}
-        >
+          onFinish={onFinish}>
           <ProFormText
             width="md"
             label="标题"
@@ -130,8 +129,8 @@ const BasicForm: FC<Record<string, any>> = () => {
             max={100}
             width="xs"
             fieldProps={{
-              formatter: (value) => `${value || 0}%`,
-              parser: (value) => Number(value ? value.replace('%', '') : '0'),
+              formatter: value => `${value || 0}%`,
+              parser: value => Number(value ? value.replace('%', '') : '0'),
             }}
           />
 
@@ -181,12 +180,12 @@ const BasicForm: FC<Record<string, any>> = () => {
                     },
                   ]}
                 />
-              );
+              )
             }}
           </ProFormDependency>
         </ProForm>
       </Card>
     </PageContainer>
-  );
-};
-export default BasicForm;
+  )
+}
+export default BasicForm

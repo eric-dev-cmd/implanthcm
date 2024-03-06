@@ -1,16 +1,16 @@
-import { request } from '@umijs/max';
-import type { BasicListItemDataType } from './data.d';
+import { request } from '@umijs/max'
+import type { BasicListItemDataType } from './data.d'
 
 type ParamsType = {
-  count?: number;
-} & Partial<BasicListItemDataType>;
+  count?: number
+} & Partial<BasicListItemDataType>
 
 export async function queryFakeList(
   params: ParamsType,
 ): Promise<{ data: { list: BasicListItemDataType[] } }> {
   return request('/api/get_list', {
     params,
-  });
+  })
 }
 
 export async function removeFakeList(
@@ -22,7 +22,7 @@ export async function removeFakeList(
       ...params,
       method: 'delete',
     },
-  });
+  })
 }
 
 export async function addFakeList(
@@ -34,7 +34,7 @@ export async function addFakeList(
       ...params,
       method: 'post',
     },
-  });
+  })
 }
 
 export async function updateFakeList(
@@ -46,5 +46,5 @@ export async function updateFakeList(
       ...params,
       method: 'update',
     },
-  });
+  })
 }

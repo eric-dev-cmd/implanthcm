@@ -3,22 +3,22 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
-import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from 'antd';
-import numeral from 'numeral';
-import type { FC } from 'react';
-import React from 'react';
-import { categoryOptions } from '../../mock';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import type { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
-import useStyles from './style.style';
+} from '@ant-design/icons'
+import { useRequest } from '@umijs/max'
+import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from 'antd'
+import numeral from 'numeral'
+import type { FC } from 'react'
+import React from 'react'
+import { categoryOptions } from '../../mock'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import type { ListItemDataType } from './data.d'
+import { queryFakeList } from './service'
+import useStyles from './style.style'
 export function formatWan(val: number) {
-  const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
-  let result: React.ReactNode = val;
+  const v = val * 1
+  if (!v || Number.isNaN(v)) return ''
+  let result: React.ReactNode = val
   if (val > 10000) {
     result = (
       <span>
@@ -30,14 +30,13 @@ export function formatWan(val: number) {
             fontSize: 14,
             fontStyle: 'normal',
             marginLeft: 2,
-          }}
-        >
+          }}>
           万
         </span>
       </span>
-    );
+    )
   }
-  return result;
+  return result
 }
 const formItemLayout = {
   wrapperCol: {
@@ -48,12 +47,12 @@ const formItemLayout = {
       span: 16,
     },
   },
-};
+}
 const CardInfo: React.FC<{
-  activeUser: React.ReactNode;
-  newUser: React.ReactNode;
+  activeUser: React.ReactNode
+  newUser: React.ReactNode
 }> = ({ activeUser, newUser }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <div className={styles.cardInfo}>
       <div>
@@ -65,37 +64,35 @@ const CardInfo: React.FC<{
         <p>{newUser}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 export const Applications: FC<Record<string, any>> = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
+    console.log('form data', values)
     return queryFakeList({
       count: 8,
-    });
-  });
+    })
+  })
 
-  const list = data?.list || [];
+  const list = data?.list || []
 
   return (
     <div className={styles.filterCardList}>
       <Card bordered={false}>
         <Form
           onValuesChange={(_, values) => {
-            run(values);
-          }}
-        >
+            run(values)
+          }}>
           <StandardFormRow
             title="所属类目"
             block
             style={{
               paddingBottom: 11,
-            }}
-          >
+            }}>
             <Form.Item name="category">
               <TagSelect expandable>
-                {categoryOptions.map((category) => (
+                {categoryOptions.map(category => (
                   <TagSelect.Option value={category.value!} key={category.value}>
                     {category.label}
                   </TagSelect.Option>
@@ -161,7 +158,7 @@ export const Applications: FC<Record<string, any>> = () => {
         }}
         loading={loading}
         dataSource={list}
-        renderItem={(item) => (
+        renderItem={item => (
           <List.Item key={item.id}>
             <Card
               hoverable
@@ -191,12 +188,10 @@ export const Applications: FC<Record<string, any>> = () => {
                         title: '2st menu item',
                       },
                     ],
-                  }}
-                >
+                  }}>
                   <EllipsisOutlined />
                 </Dropdown>,
-              ]}
-            >
+              ]}>
               <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
               <div>
                 <CardInfo
@@ -209,6 +204,6 @@ export const Applications: FC<Record<string, any>> = () => {
         )}
       />
     </div>
-  );
-};
-export default Applications;
+  )
+}
+export default Applications
