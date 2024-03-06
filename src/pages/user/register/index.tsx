@@ -73,7 +73,7 @@ const Register: FC = () => {
             items={[
               {
                 key: 'account',
-                label: 'Register',
+                label: 'Đăng ký',
               },
             ]}
           />
@@ -125,7 +125,7 @@ const Register: FC = () => {
               size="large"
               type="password"
               prefix={<LockOutlined />}
-              placeholder="Repeat your password"
+              placeholder="Nhập lại mật khẩu"
             />
           </FormItem>
           <FormItem
@@ -152,7 +152,7 @@ const Register: FC = () => {
                 type="primary"
                 htmlType="submit"
               >
-                <span>Register</span>
+                <span>Đăng ký</span>
               </Button>
             </div>
           </FormItem>
@@ -162,8 +162,8 @@ const Register: FC = () => {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontSize: 14 }}>Or</div>
-            <Link to="/user/register">
+            <div style={{ fontSize: 14 }}>Hoặc</div>
+            <Link to="/user/login">
               <Button
                 size="large"
                 // loading={submitting}
@@ -172,7 +172,7 @@ const Register: FC = () => {
                 htmlType="submit"
                 style={{ marginTop: 10, fontWeight: 'bold' }}
               >
-                <span>LOGIN</span>
+                <span>Đăng nhập</span>
               </Button>
             </Link>
           </div>
