@@ -1,3 +1,5 @@
+import Footer from '@/components/LandingPage/Footer'
+import Topmenu from '@/components/LandingPage/Header'
 import { login } from '@/services/ant-design-pro/api'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components'
@@ -115,6 +117,7 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Topmenu></Topmenu>
       <div
         style={{
           flex: '1',
@@ -240,6 +243,7 @@ const Login: React.FC = () => {
           </Button>
         </Link>
       </div>
+      <Footer></Footer>
     </div>
   )
 }
