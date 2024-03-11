@@ -1,0 +1,190 @@
+.fs-120 {
+  font-size: 120%;
+}
+
+.container {
+  display: flex;
+  position: relative;
+}
+
+.image-container {
+  width: 180%;
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  min-height: 600px;
+  max-height: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.information-container-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 85%;
+  color: #fff;
+}
+
+.title-left {
+  line-height: 36px;
+  font-weight: 700;
+}
+
+.alt-font {
+  font-family: "Dancing Script", sans-serif;
+  color: #fff;
+  font-style: italic;
+  font-weight: 400 !important;
+}
+
+.centered {
+  margin-bottom: 12px;
+  /* Khoảng cách giữa mỗi phần thông tin */
+}
+
+.information-container-right {
+  flex-grow: 1;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.information-container-right a {
+  display: flex;
+  flex-direction: row;
+}
+
+.box-image {
+  width: 20%;
+  flex-shrink: 0;
+}
+
+.box-image img {
+  width: 100%;
+  height: auto;
+}
+
+.box-text {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.post-title {
+  /* font-size: 120%; */
+  margin-top: 8px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: medium;
+}
+
+.is-divider {
+  margin-bottom: 10px;
+  border-color: #fe9322;
+}
+
+.from_the_blog_excerpt {
+  margin-bottom: 0;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.centered {
+  text-align: center;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Số dòng tối đa */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* Số dòng tối đa */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.txt-main {
+  color: #7a7474;
+}
+
+/* Thêm media query cho màn hình nhỏ hơn */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    /* Chuyển sang layout dạng cột */
+  }
+
+  .image-container,
+  .information-container-right {
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng */
+  }
+}
+
+.fs-bold {
+  font-weight: 700;
+}
+
+/* CSS */
+/* div.title-devider {
+  position: relative;
+}
+
+div.title-devider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #c0b1b1;
+}
+
+p.title-content {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+p.title-content::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+} */
+/* CSS */
+.title-devider {
+  padding: 10px;
+  /* Điều chỉnh khoảng cách giữa header và nội dung danh sách */
+  background-color: #f0f0f0;
+  /* Màu nền của header */
+  border-bottom: 1px solid #d9d9d9;
+  /* Đường biên dưới */
+}
+
+.title-content {
+  font-size: 18px;
+  /* Kích thước chữ của tiêu đề */
+  font-weight: bold;
+  /* Độ đậm của chữ */
+  color: #010910;
+  /* Màu chữ của tiêu đề */
+  margin-bottom: 0;
+  /* Loại bỏ margin dưới đối với phần tiêu đề */
+}

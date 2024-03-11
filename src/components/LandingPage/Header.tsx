@@ -176,7 +176,7 @@ const Topmenu = () => {
 
   return (
     <div style={{ backgroundColor: 'white' }}>
-      <div className={styles.contact}>
+      <div className={styles.contact} style={{ padding: '0.5% 10%' }}>
         <div className={styles.contactInfo}>
           <MailOutlined style={{ color: 'white', marginRight: 5 }} />
           <a href="mailto:thuky@implanthcm.com" className={styles.linkTag}>

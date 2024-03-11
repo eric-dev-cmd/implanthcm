@@ -84,6 +84,7 @@ export default [
       {
         name: 'basic-form',
         icon: 'smile',
+        layout: false,
         path: '/form/basic-form',
         component: './form/basic-form',
       },
@@ -258,8 +259,19 @@ export default [
     ],
   },
   {
+    name: 'home',
     path: '/',
-    redirect: '/dashboard/analysis',
+    layout: false,
+    routes: [
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '',
+        component: './home/basic',
+        // redirect: '/profile/basic',
+      },
+    ],
+    // redirect: '/dashboard/analysis',
   },
   {
     component: '404',
