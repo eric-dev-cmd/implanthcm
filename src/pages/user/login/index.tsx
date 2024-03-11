@@ -1,5 +1,3 @@
-import Footer from '@/components/LandingPage/Footer'
-import Topmenu from '@/components/LandingPage/Header'
 import { login } from '@/services/ant-design-pro/api'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components'
@@ -36,7 +34,7 @@ const useStyles = createStyles(({ token }) => {
     container: {
       display: 'flex',
       flexDirection: 'column',
-      height: '100vh',
+      paddingBottom: 42,
       overflow: 'auto',
       backgroundImage:
         "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
@@ -117,7 +115,6 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Topmenu></Topmenu>
       <div
         style={{
           flex: '1',
@@ -227,7 +224,6 @@ const Login: React.FC = () => {
       </div>
       <div
         style={{
-          marginBottom: 500,
           textAlign: 'center',
         }}>
         <div style={{ fontSize: 14 }}>Hoặc</div>
@@ -243,7 +239,6 @@ const Login: React.FC = () => {
           </Button>
         </Link>
       </div>
-      <Footer></Footer>
     </div>
   )
 }

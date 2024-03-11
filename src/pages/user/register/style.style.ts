@@ -10,6 +10,7 @@ const useStyles = createStyles(({ token }) => {
       backgroundImage:
         "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
       backgroundSize: '100% 100%',
+      paddingBottom: 42,
     },
     main: {
       width: '368px',
