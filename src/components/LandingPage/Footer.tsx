@@ -1,155 +1,157 @@
-import { EnvironmentOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons'
+import {
+  DoubleRightOutlined,
+  EnvironmentOutlined,
+  MailOutlined,
+  PhoneOutlined,
+} from '@ant-design/icons'
 import { Link } from '@umijs/max'
 import { Col, Row } from 'antd'
 import { createStyles } from 'antd-style'
-import { FormattedMessage } from 'react-intl'
 const useStyles = createStyles({
   footer: {
-    padding: '30px 30px 20px 30px',
     color: 'white',
     backgroundImage: 'url(https://implanthcm.com/wp-content/uploads/2020/07/footer-bg.png)',
     borderTop: '1px solid #e5e5e5',
     backgroundColor: '#191919',
   },
+  footerBlock:{
+    paddingRight:'10px',
+  },
+  footerWarp: {
+    maxWidth:'1250px',
+    padding:'30px 10px',
+    marginRight:'auto',
+    marginLeft:'auto'
+  },
+  footerItem:{
+    display:'flex',
+    gap:'10px',
+    textcolor:'white',
+    padding:'5px 0px',
+    fontWeight:'400',
+    fontSize:'16px',
+    a:{
+      color:'white',
+    },
+    span:{
+      color:'#ff8a00', fontSize:12,
+    },
+  },
+  footerContractInfo:{
+    padding:5,
+    fontSize:14,
+    border:'1px solid #ff8a00',
+    borderRadius:25
+  },
+  absoluteFooter:{
+    textAlign:'center',
+    background:'rgb(254, 147, 34)',
+    color:'rgba(255, 255, 255, 0.5)',
+    padding:'15px 10px '
+  }
 })
 const Footer = () => {
+  const { styles } = useStyles()
   const items = [
     {
       label: 'Giới thiệu',
       key: 'introduce',
       children: [
         {
+          key: 1,
           label: <Link to="/">Ban chấp hành</Link>,
         },
         {
+          key: 2,
           label: <Link to="/">Điều lệ hội</Link>,
         },
         {
+          key: 3,
           label: <Link to="/">Phương hướng hoạt động</Link>,
         },
         {
+          key: 4,
           label: <Link to="/">Quyền lợi hội viên</Link>,
         },
       ],
     },
     {
       label: 'Hoạt động hội',
-      key: 'introduce',
+      key: 'activities',
       children: [
         {
-          label: <Link to="/">Ban chấp hành</Link>,
+          key: 5,
+          label: <Link to="/">Hội nghị - Huấn luyện</Link>,
         },
         {
-          label: <Link to="/">Điều lệ hội</Link>,
+          key: 6,
+          label: <Link to="/">Hoạt động xã hội</Link>,
         },
         {
-          label: <Link to="/">Phương hướng hoạt động</Link>,
+          key: 7,
+          label: <Link to="/">Sinh hoạt chuyên môn</Link>,
         },
         {
-          label: <Link to="/">Quyền lợi hội viên</Link>,
+          key: 8,
+          label: <Link to="/">Nha khoa cộng đồng</Link>,
         },
       ],
     },
   ]
   {
-    const { styles } = useStyles()
     return (
       <footer id="footer" className={styles.footer}>
-        <div className="footer-wrap">
+        <div className={styles.footerWarp}>
           <Row>
             <Col md={6} sm={24} xs={24}>
-              <div className="footer-center">
+              <div className={styles.footerBlock}>
                 <h2>
                   <img alt="logo" src="/logo-mail.png" />
                 </h2>
-                <div>
-                  <PhoneOutlined />
+                <div className={styles.footerItem}>
+                  <PhoneOutlined className={styles.footerContractInfo}/>
                   <a href="tel:097.972.5810">097.972.5810</a>
                 </div>
-                <div>
-                  <MailOutlined />
+                <div className={styles.footerItem}>
+                  <MailOutlined className={styles.footerContractInfo} />
                   <a href="mailto:thuky@implanthcm.com">thuky@implanthcm.com</a>
                 </div>
-                <div>
-                  <EnvironmentOutlined />
-                  Địa chỉ: 125 Lê Thị Riêng, P.Bến Thành, Quận 1, Tp. Hồ Chí Minh
+                <div className={styles.footerItem}>
+                  <div><EnvironmentOutlined className={styles.footerContractInfo}/></div>
+                  <p> Địa chỉ: 125 Lê Thị Riêng, P.Bến Thành, Quận 1, Tp. Hồ Chí Minh </p>
                 </div>
               </div>
             </Col>
+            {items.map(item => {
+              return (
+                <Col md={6} sm={24} xs={24} key={item.key}>
+                  <div className={styles.footerBlock}>
+                    <h2>{item.label}</h2>
+                    {item.children &&
+                      item.children.map(child => {
+                        return (
+                          <div key={child.key} className={styles.footerItem}>
+                            <DoubleRightOutlined />
+                            {child.label}
+                          </div>
+                        )
+                      })}
+                  </div>
+                </Col>
+              )
+            })}
             <Col md={6} sm={24} xs={24}>
-              <div className="footer-center">
-                <h2>Giới thiệu</h2>
-                <div>
-                  <a target="_blank " href="http://ant.design">
-                    Ant Design
-                  </a>
-                </div>
-                <div>
-                  <a target="_blank " href="https://pro.ant.design/">
-                    Ant Design Pro
-                  </a>
-                </div>
-                <div>
-                  <a href="http://mobile.ant.design">Ant Design Mobile</a>
-                </div>
-                <div>
-                  <a target="_blank" rel="noopener" href="http://motion.ant.design">
-                    Ant Motion
-                  </a>
-                  <span> - </span>
-                  <FormattedMessage id="app.footer.motion" />
-                </div>
-              </div>
-            </Col>
-            <Col md={6} sm={24} xs={24}>
-              <div className="footer-center">
-                <h2>Hoạt động hội</h2>
-                <div>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href="https://github.com/ant-design/ant-design-landing/issues">
-                    <FormattedMessage id="app.footer.issues" />
-                  </a>
-                </div>
-                <div>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href={`http://ant.design/docs/spec/work-with-us-cn`}>
-                    <FormattedMessage id="app.footer.work-with-us" />
-                  </a>
-                </div>
-                <div>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href={`http://ant.design/docs/spec/work-with-us-cn`}>
-                    <FormattedMessage id="app.footer.work-with-us" />
-                  </a>
-                </div>
-                <div>
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href={`http://ant.design/docs/spec/work-with-us-cn`}>
-                    <FormattedMessage id="app.footer.work-with-us" />
-                  </a>
-                </div>
-              </div>
-            </Col>
-            <Col md={6} sm={24} xs={24}>
-              <div className="footer-center">
+              <div className={styles.footerBlock}>
                 <h2>Thống kê</h2>
-                <div>
+                <div className={styles.footerItem}>
                   <img alt="logo" src="/mvctoday.png" />
                   Số lượng xem hôm nay: 38
                 </div>
-                <div>
+                <div className={styles.footerItem}>
                   <img alt="logo" src="/mvctotalviews.png" />
                   Tổng số lượng xem: 427491
                 </div>
-                <div>
+                <div className={styles.footerItem}>
                   <img alt="logo" src="/mvconline.png" />
                   Người online: 1
                 </div>
@@ -157,11 +159,11 @@ const Footer = () => {
             </Col>
           </Row>
         </div>
-        <div className="bottom-bar">
-          Made with <span className="heart">❤</span> by
-          <a target="_blank" rel="noopener noreferrer" href="https://yuque.com/afx/blog">
-            AFX
-          </a>
+        <div className={` ${styles.absoluteFooter}`}>
+          <div >
+            © Copyright 2024 Bản quyền nội dung thuộc về
+            <strong> Hội Cấy Ghép Nha Khoa TP. HCM</strong>
+          </div>
         </div>
       </footer>
     )
