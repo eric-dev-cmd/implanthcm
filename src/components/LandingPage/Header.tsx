@@ -22,7 +22,7 @@ const useStyles = createStyles(({ css, responsive }) => ({
   linkTag: {
     textDecoration: 'none',
     color: 'white',
-    fontSize: 14,
+    fontSize: 13,
   },
   line: {
     backgroundColor: 'white',
@@ -55,6 +55,21 @@ const useStyles = createStyles(({ css, responsive }) => ({
     align-items: center;
     ${responsive.mobile} {
       display: 'none';
+    }
+  `,
+  contactInfo: css`
+    display: flex;
+    alignitems: center;
+    ${responsive.mobile} {
+      display: none;
+    }
+  `,
+  loginComponent: css`
+    display: flex;
+    alignitems: center;
+    ${responsive.mobile} {
+      justify-content: center;
+      width: 100%;
     }
   `,
 }))
@@ -162,7 +177,7 @@ const Topmenu = () => {
   return (
     <div style={{ backgroundColor: 'white' }}>
       <div className={styles.contact}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className={styles.contactInfo}>
           <MailOutlined style={{ color: 'white', marginRight: 5 }} />
           <a href="mailto:thuky@implanthcm.com" className={styles.linkTag}>
             thuky@implanthcm.com
@@ -173,9 +188,9 @@ const Topmenu = () => {
             097.972.5810
           </a>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className={styles.loginComponent}>
           <Link to="/" className={styles.linkTag}>
-            <span style={{ fontSize: 11, fontWeight: 'bold' }}>ĐĂNG KÝ HỘI VIÊN</span>
+            <span style={{ fontSize: 10, fontWeight: 'bold' }}>ĐĂNG KÝ HỘI VIÊN</span>
           </Link>
           <div className={styles.line}></div>
           <Link to="/" className={styles.linkTag}>
