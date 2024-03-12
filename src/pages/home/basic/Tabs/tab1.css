@@ -1,0 +1,73 @@
+/* Adjust your existing styles */
+.blog-list-style-5 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blog-item {
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  /* Use flex container */
+}
+
+.blog-image {
+  width: 25%;
+  /* Set width to 25% for the image container */
+  flex-shrink: 0;
+  /* Prevent image from shrinking */
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.blog-title-wraper {
+  padding: 0px 20px;
+  width: 100%;
+  /* Set width to 75% for the text content container */
+}
+
+.blog-title {
+  font-size: 18px;
+  /* margin-bottom: 10px; */
+}
+
+.blog-description {
+  color: #555;
+}
+
+.blog-info {
+  margin-top: 10px;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Số dòng tối đa */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* Số dòng tối đa */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+p.tacgia {
+  color: #a59595;
+  font-style: italic;
+}
+
+p.tacgia b {
+  color: #fe9322;
+}

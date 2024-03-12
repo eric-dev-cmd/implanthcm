@@ -5,6 +5,7 @@ import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
 import NewsList from './News/NewsList'
 import './styles.css'
+import Tab1Component from './Tabs/Tab1'
 import { carouselImages, mockNewsData } from './_mock'
 
 const contentStyle: React.CSSProperties = {
@@ -32,6 +33,13 @@ const activeStyle = {
   background: '#e5831d', // Change the color for active/clicked
 }
 
+const containerStyle = {
+  height: '400px', // Set your desired height
+  width: '600px', // Set your desired width
+  margin: 'auto', // Center the container horizontally
+  textAlign: 'center', // Center the content inside the container
+}
+
 const data = [
   {
     title: 'Bảo vệ: Bài cần dịch số 1',
@@ -44,6 +52,24 @@ const data = [
   },
   {
     title: 'Bảo vệ: Bài cần dịch số 1 4',
+  },
+]
+
+const items: TabsProps['items'] = [
+  {
+    key: '1',
+    label: 'BÁC SĨ HSDI',
+    children: <Tab1Component />,
+  },
+  {
+    key: '2',
+    label: 'BÁC SĨ TRẺ',
+    children: 'Content of Tab Pane 2',
+  },
+  {
+    key: '3',
+    label: 'KTV PHỤC HÌNH',
+    children: 'Content of Tab Pane 3',
   },
 ]
 
@@ -113,6 +139,7 @@ const Basic: FC = () => {
           </div>
         ))}
       </Carousel>
+      {/* Layout 1 */}
       <div style={{ padding: '0.5% 10%' }}>
         <Divider orientation="left" orientationMargin="0" style={{ borderColor: '#fe9322' }}>
           <span className="fs-120">HÌNH ẢNH HOẠT ĐỘNG HỘI</span>
@@ -151,6 +178,7 @@ const Basic: FC = () => {
           </div>
         </div>
       </div>
+      {/* Layout 2 */}
       <div style={{ padding: '0.5% 10%', background: '#dff6fa', marginRight: '4px' }}>
         <Row>
           <Col span={8}>
@@ -184,16 +212,57 @@ const Basic: FC = () => {
                 defaultActiveKey="1"
                 size={'large'}
                 type="card"
-                items={new Array(3).fill(null).map((_, i) => {
-                  const id = String(i + 1)
-                  return {
-                    label: `Tab ${id}`,
-                    key: id,
-                    children: `Content of Tab Pane ${id}`,
-                  }
-                })}
+                items={items}
               />
             </div>
+          </Col>
+        </Row>
+      </div>
+      {/* Layout 3 */}
+      <div style={{ padding: '0.5% 10%', background: '#fff', marginRight: '4px' }}>
+        <Row>
+          <Col span={24}>
+            <Divider orientation="left" orientationMargin="0" style={{ borderColor: '#fe9322' }}>
+              <span className="fs-120">HÌNH ẢNH HOẠT ĐỘNG HỘI</span>
+            </Divider>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8}>
+            <p>Đang cập nhật</p>
+          </Col>
+          <Col span={8}>
+            <p>Đang cập nhật</p>
+          </Col>
+          <Col span={8}>
+            <p>Đang cập nhật</p>
+          </Col>
+        </Row>
+      </div>
+      {/* Layout 4 */}
+      <div style={{ padding: '0.5% 10%', background: '#eeeeee', marginRight: '4px' }}>
+        <Row style={{ marginTop: '10px' }}>
+          <Col span={12}>
+            <div className="container-layout-04">
+              <h1>
+                <span style={{ fontSize: '140%' }}>HỘI NGHỊ HSDI 2019</span>
+              </h1>
+              <p className="line-clamp-3">
+                Trong bối cảnh phát triển không ngừng của chuyên ngành implant nha trên thế giới,
+                mang lại một chất lượng điều trị nha khoa ngày càng tốt hơn cho cộng đồng…
+              </p>
+              <Button style={{ ...buttonStyle, ...hoverStyle, ...activeStyle }}>
+                ĐĂNG KÝ NGAY
+              </Button>
+            </div>
+          </Col>
+          <Col span={12}>
+            {/* Replace "Đang cập nhật" with an image */}
+            <img
+              src="https://implanthcm.com/wp-content/uploads/2022/07/bg-1-193182.jpg" // Replace with the actual path to your image
+              alt="Alternative text"
+              className="update-image"
+            />
           </Col>
         </Row>
       </div>
