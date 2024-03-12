@@ -251,9 +251,7 @@ const Basic: FC = () => {
                 Trong bối cảnh phát triển không ngừng của chuyên ngành implant nha trên thế giới,
                 mang lại một chất lượng điều trị nha khoa ngày càng tốt hơn cho cộng đồng…
               </p>
-              <Button style={{ ...buttonStyle, ...hoverStyle, ...activeStyle }}>
-                ĐĂNG KÝ NGAY
-              </Button>
+              <Button style={{ ...buttonStyle, ...hoverStyle, ...activeStyle }}>Xem tiếp</Button>
             </div>
           </Col>
           <Col span={12}>
