@@ -104,19 +104,19 @@ const Topmenu = () => {
       children: [
         {
           type: 'group',
-          label: <Link to="/">Hội Cấy Ghép Nha Khoa</Link>,
+          label: <Link to="/gioi-thieu/hoi-cay-ghep-nha-khoa/">Hội Cấy Ghép Nha Khoa</Link>,
         },
         {
           type: 'group',
-          label: <Link to="/">Ban Chấp Hành</Link>,
+          label: <Link to="/gioi-thieu/ban-chap-hanh/">Ban Chấp Hành</Link>,
         },
         {
           type: 'group',
-          label: <Link to="/">Điều Lệ Hội</Link>,
+          label: <Link to="/gioi-thieu/dieu-le-hoi/">Điều Lệ Hội</Link>,
         },
         {
           type: 'group',
-          label: <Link to="/">Phương Hướng Hoạt Động</Link>,
+          label: <Link to="/gioi-thieu/phuong-huong-hoat-dong">Phương Hướng Hoạt Động</Link>,
         },
       ],
     },
@@ -127,11 +127,11 @@ const Topmenu = () => {
       children: [
         {
           type: 'group',
-          label: 'Đăng ký hội viên',
+          label: <Link to="/user/register">Đăng ký hội viên</Link>,
         },
         {
           type: 'group',
-          label: 'Quyền lợi hội viên',
+          label: <Link to="/hoi-vien/quyen-loi-hoi-vien">Quyền lợi hội viên</Link>,
         },
       ],
     },

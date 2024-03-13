@@ -7,7 +7,7 @@ import {
 import { Link } from '@umijs/max'
 import { Col, Row } from 'antd'
 import { createStyles } from 'antd-style'
-const useStyles =createStyles(({ css, responsive }) => ({
+const useStyles = createStyles(({ css, responsive }) => ({
   footer: {
     color: 'white',
     backgroundImage: 'url(https://implanthcm.com/wp-content/uploads/2020/07/footer-bg.png)',
@@ -45,9 +45,9 @@ const useStyles =createStyles(({ css, responsive }) => ({
       color: '#ff8a00',
       fontSize: 12,
     },
-    p:{
-      margin:0
-    }
+    p: {
+      margin: 0,
+    },
   },
   footerContractInfo: {
     padding: 5,
@@ -62,7 +62,7 @@ const useStyles =createStyles(({ css, responsive }) => ({
     padding: '15px 10px ',
     fontSize: 14,
   },
-}));
+}))
 const Footer = () => {
   const { styles } = useStyles()
   const items = [
@@ -72,19 +72,19 @@ const Footer = () => {
       children: [
         {
           key: 1,
-          label: <Link to="/">Ban chấp hành</Link>,
+          label: <Link to="/gioi-thieu/ban-chap-hanh">Ban chấp hành</Link>,
         },
         {
           key: 2,
-          label: <Link to="/">Điều lệ hội</Link>,
+          label: <Link to="/gioi-thieu/dieu-le-hoi">Điều lệ hội</Link>,
         },
         {
           key: 3,
-          label: <Link to="/">Phương hướng hoạt động</Link>,
+          label: <Link to="/gioi-thieu/phuong-huong-hoat-dong">Phương hướng hoạt động</Link>,
         },
         {
           key: 4,
-          label: <Link to="/">Quyền lợi hội viên</Link>,
+          label: <Link to="/hoivien/quyen-loi-hoi-vien">Quyền lợi hội viên</Link>,
         },
       ],
     },
