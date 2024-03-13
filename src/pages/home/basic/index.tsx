@@ -1,12 +1,19 @@
 import Footer from '@/components/LandingPage/Footer'
 import Topmenu from '@/components/LandingPage/Header'
-import { Button, Carousel, Col, Divider, List, Row, Tabs } from 'antd'
+import { Button, Col, Divider, List, Row, Tabs } from 'antd'
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import NewsList from './News/NewsList'
 import './styles.css'
 import Tab1Component from './Tabs/Tab1'
 import { carouselImages, mockNewsData } from './_mock'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 const contentStyle: React.CSSProperties = {
   width: '100%',
@@ -130,15 +137,28 @@ const onChange = (key: string) => {
 const Basic: FC = () => {
   return (
     <>
-      {/* Header */}
       <Topmenu />
-      <Carousel autoplay>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper">
         {carouselImages.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Image ${index + 1}`} style={contentStyle} />
+            <SwiperSlide>
+              <img src={image} alt={`Image ${index + 1}`} style={contentStyle} />
+            </SwiperSlide>
           </div>
         ))}
-      </Carousel>
+      </Swiper>
       {/* Layout 1 */}
       <div style={{ padding: '0.5% 10%' }}>
         <Divider orientation="left" orientationMargin="0" style={{ borderColor: '#fe9322' }}>
@@ -264,7 +284,6 @@ const Basic: FC = () => {
           </Col>
         </Row>
       </div>
-      {/* Footer */}
       <Footer />
     </>
   )

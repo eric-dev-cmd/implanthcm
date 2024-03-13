@@ -104,11 +104,19 @@ const Topmenu = () => {
       children: [
         {
           type: 'group',
-          label: <Link to="/">Hội cấy ghép nha khoa</Link>,
+          label: <Link to="/">Hội Cấy Ghép Nha Khoa</Link>,
         },
         {
           type: 'group',
-          label: <Link to="/">Quyền lợi hội viên</Link>,
+          label: <Link to="/">Ban Chấp Hành</Link>,
+        },
+        {
+          type: 'group',
+          label: <Link to="/">Điều Lệ Hội</Link>,
+        },
+        {
+          type: 'group',
+          label: <Link to="/">Phương Hướng Hoạt Động</Link>,
         },
       ],
     },
