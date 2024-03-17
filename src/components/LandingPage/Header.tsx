@@ -4,8 +4,11 @@ import {
   MailOutlined,
   MenuOutlined,
   PhoneOutlined,
+  PictureOutlined,
   ReadOutlined,
+  SolutionOutlined,
   TeamOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 import { Link } from '@umijs/max'
 import { Button, Drawer, Image, Menu } from 'antd'
@@ -136,49 +139,53 @@ const Topmenu = () => {
       ],
     },
     {
-      label: 'Tin tức',
+      label: <Link to="/category/tin-tuc-khac/">TIN TỨC</Link>,
       key: 'news',
       icon: <ReadOutlined />,
     },
     {
-      label: 'Hoạt động hội',
+      label: 'HOẠT ĐỘNG HỘI',
       key: 'activities',
-      icon: <TeamOutlined />,
+      icon: <PictureOutlined />,
       children: [
         {
           type: 'group',
-          label: 'Đăng ký hội viên',
+          label: <Link to="/category/hoat-dong-hoi/hoi-nghi-huan-luyen/">Hội nghị - Huấn luyện</Link>,
         },
         {
           type: 'group',
-          label: 'Quyền lợi hội viên',
+          label: <Link to="/category/hoat-dong-hoi/hoat-dong-xa-hoi/">Hoạt động xã hội</Link>,
         },
       ],
     },
     {
-      label: 'Góc chuyên môn',
+      label: 'GÓC CHUYÊN MÔN',
       key: 'specialize',
-      icon: <TeamOutlined />,
+      icon: <SolutionOutlined />,
       children: [
         {
           type: 'group',
-          label: 'Đăng ký hội viên',
+          label: <Link to="/category/goc-chuyen-mon/bai-viet-chuyen-mon/">Bác sĩ HSDI</Link>,
         },
         {
           type: 'group',
-          label: 'Quyền lợi hội viên',
+          label: <Link to="/category/goc-chuyen-mon/bac-si-tre/">Bác sĩ trẻ</Link>,
+        },
+        {
+          type: 'group',
+          label: <Link to="/category/goc-chuyen-mon/ktv-phuc-hinh/">KTV phục hình</Link>,
         },
       ],
     },
     {
-      label: 'Góc bệnh nhân',
+      label: <Link to="/category/goc-benh-nhan/">GÓC BỆNH NHÂN</Link>,
       key: 'patient',
-      icon: <ReadOutlined />,
+      icon: <UserOutlined />,
     },
     {
-      label: 'Liên hệ',
+      label: <Link to="/lien-he/">LIÊN HỆ</Link>,
       key: 'contact',
-      icon: <ReadOutlined />,
+      icon: <MailOutlined />,
     },
   ]
 

@@ -299,6 +299,56 @@ export default [
         path: '/hoi-vien/quyen-loi-hoi-vien',
         component: './home/membership/MembershipBenefits',
       },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/tin-tuc-khac',
+        component: './home/newSection',
+      },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/goc-benh-nhan',
+        component: './home/patientSection',
+      },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/lien-he',
+        component: './home/contact',
+      },
+      // Góc chuyên môn
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/goc-chuyen-mon/bai-viet-chuyen-mon',
+        component: './home/specializedSection',
+      },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/goc-chuyen-mon/bac-si-tre',
+        component: './home/specializedSection',
+      },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/goc-chuyen-mon/ktv-phuc-hinh',
+        component: './home/specializedSection',
+      },
+      //Hoạt động hội
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/hoat-dong-hoi/hoi-nghi-huan-luyen/',
+        component: './home/activitySection',
+      },
+      {
+        name: 'center',
+        icon: 'smile',
+        path: '/category/hoat-dong-hoi/hoat-dong-xa-hoi/',
+        component: './home/activitySection',
+      },
     ],
   },
   {

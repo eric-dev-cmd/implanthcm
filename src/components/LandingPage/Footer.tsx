@@ -84,7 +84,7 @@ const Footer = () => {
         },
         {
           key: 4,
-          label: <Link to="/hoivien/quyen-loi-hoi-vien">Quyền lợi hội viên</Link>,
+          label: <Link to="/hoi-vien/quyen-loi-hoi-vien">Quyền lợi hội viên</Link>,
         },
       ],
     },
