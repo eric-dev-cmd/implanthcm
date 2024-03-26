@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons'
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components'
 import {
   FooterToolbar,
@@ -9,7 +9,7 @@ import {
   ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components'
-import { Button, Drawer, Input, message } from 'antd'
+import { Button, Drawer, message } from 'antd'
 import React, { useRef, useState } from 'react'
 import type { FormValueType } from './components/UpdateForm'
 import UpdateForm from './components/UpdateForm'
@@ -22,16 +22,16 @@ import { addRule, removeRule, rule, updateRule } from './service'
  */
 
 const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading('正在添加')
+  const hide = message.loading('Thêm')
 
   try {
     await addRule({ ...fields })
     hide()
-    message.success('添加成功')
+    message.success('Thêm thành công')
     return true
   } catch (error) {
     hide()
-    message.error('添加失败请重试！')
+    message.error('Không thêm được, vui lòng thử lại!')
     return false
   }
 }
@@ -42,7 +42,7 @@ const handleAdd = async (fields: TableListItem) => {
  */
 
 const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
-  const hide = message.loading('正在配置')
+  const hide = message.loading('Cấu hình')
 
   try {
     await updateRule({
@@ -50,22 +50,22 @@ const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) =
       ...fields,
     })
     hide()
-    message.success('配置成功')
+    message.success('Cấu hình thành công')
     return true
   } catch (error) {
     hide()
-    message.error('配置失败请重试！')
+    message.error('Cấu hình không thành công, vui lòng thử lại!')
     return false
   }
 }
 /**
- * 删除节点
+ * Xóa
  *
  * @param selectedRows
  */
 
 const handleRemove = async (selectedRows: TableListItem[]) => {
-  const hide = message.loading('正在删除')
+  const hide = message.loading('Xóa')
   if (!selectedRows) return true
 
   try {
@@ -73,114 +73,81 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
       key: selectedRows.map(row => row.key),
     })
     hide()
-    message.success('删除成功，即将刷新')
+    message.success('Xóa thành công')
     return true
   } catch (error) {
     hide()
-    message.error('删除失败，请重试')
+    message.error('Xóa không thành công, vui lòng thử lại!')
     return false
   }
 }
 
 const TableList: React.FC = () => {
-  /** 新建窗口的弹窗 */
   const [createModalVisible, handleModalVisible] = useState<boolean>(false)
-  /** 分布更新窗口的弹窗 */
-
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false)
   const [showDetail, setShowDetail] = useState<boolean>(false)
   const actionRef = useRef<ActionType>()
   const [currentRow, setCurrentRow] = useState<TableListItem>()
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([])
-  /** 国际化配置 */
 
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: '规则名称',
-      dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
-      render: (dom, entity) => {
-        return (
-          <a
-            onClick={() => {
-              setCurrentRow(entity)
-              setShowDetail(true)
-            }}>
-            {dom}
-          </a>
-        )
-      },
+      title: 'ID',
+      dataIndex: 'id',
+      hideInSearch: true,
+      colSize:1,
+      width: 50,
     },
     {
-      title: '描述',
-      dataIndex: 'desc',
+      title: 'Tên',
+      dataIndex: 'name1',
+      sorter: true,
       valueType: 'textarea',
+      hideInSearch: true,
+      width: '50%',
+      renderText: (val: string) => `${val}`,
     },
     {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
+      title: 'Tên',
+      dataIndex: 'name2',
       sorter: true,
-      hideInForm: true,
-      renderText: (val: string) => `${val}万`,
+      valueType: 'textarea',
+      hideInSearch: true,
+      width: '50%',
+      renderText: (val: string) => `${val}`,
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: '关闭',
-          status: 'Default',
-        },
-        1: {
-          text: '运行中',
-          status: 'Processing',
-        },
-        2: {
-          text: '已上线',
-          status: 'Success',
-        },
-        3: {
-          text: '异常',
-          status: 'Error',
-        },
-      },
-    },
-    {
-      title: '上次调度时间',
-      sorter: true,
-      dataIndex: 'updatedAt',
-      valueType: 'dateTime',
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status')
-
-        if (`${status}` === '0') {
-          return false
-        }
-
-        if (`${status}` === '3') {
-          return <Input {...rest} placeholder="请输入异常原因！" />
-        }
-
-        return defaultRender(item)
-      },
-    },
-    {
-      title: '操作',
+      title: '',
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
-        <a
-          key="config"
+        <Button
+          key="add"
           onClick={() => {
             handleUpdateModalVisible(true)
             setCurrentRow(record)
           }}>
-          配置
-        </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          订阅警报
-        </a>,
+          <EyeOutlined />
+        </Button>,
+        <Button
+          key="edit"
+          type="primary"
+          onClick={() => {
+            handleUpdateModalVisible(true)
+            setCurrentRow(record)
+          }}>
+          <EditOutlined /> 
+        </Button>,
+        <Button
+          key="delete"
+          type="primary"
+          danger
+          onClick={() => {
+            handleUpdateModalVisible(true)
+            setCurrentRow(record)
+          }}>
+          <DeleteOutlined /> 
+        </Button>,
       ],
     },
   ]
@@ -188,12 +155,13 @@ const TableList: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<TableListItem, TableListPagination>
-        headerTitle="查询表格"
+        headerTitle="Bảng"
         actionRef={actionRef}
         rowKey="key"
-        search={{
-          labelWidth: 120,
+        scroll={{
+          x: 960,
         }}
+        search={false}
         toolBarRender={() => [
           <Button
             type="primary"
@@ -201,7 +169,7 @@ const TableList: React.FC = () => {
             onClick={() => {
               handleModalVisible(true)
             }}>
-            <PlusOutlined /> 新建
+            <PlusOutlined /> Thêm mới
           </Button>,
         ]}
         request={rule}
@@ -216,7 +184,7 @@ const TableList: React.FC = () => {
         <FooterToolbar
           extra={
             <div>
-              已选择{' '}
+              Đã chọn{' '}
               <a
                 style={{
                   fontWeight: 600,
@@ -235,13 +203,12 @@ const TableList: React.FC = () => {
               setSelectedRows([])
               actionRef.current?.reloadAndRest?.()
             }}>
-            批量删除
+            Xóa hết
           </Button>
-          <Button type="primary">批量审批</Button>
         </FooterToolbar>
       )}
       <ModalForm
-        title="新建规则"
+        title="Thêm mới"
         width="400px"
         open={createModalVisible}
         onVisibleChange={handleModalVisible}
@@ -258,7 +225,7 @@ const TableList: React.FC = () => {
           rules={[
             {
               required: true,
-              message: '规则名称为必填项',
+              message: 'Bắt buộc nhập',
             },
           ]}
           width="md"

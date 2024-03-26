@@ -7,6 +7,7 @@ interface INewsItem {
   imageSrc: string
   title: string
   excerpt: string
+  id: string
   // Add other properties as needed
 }
 // Define the type of the newsData prop

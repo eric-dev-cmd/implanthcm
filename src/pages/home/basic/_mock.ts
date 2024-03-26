@@ -13,6 +13,8 @@ export const mockNewsData = [
       'THÔNG BÁO MỞ ĐĂNG KÝ DỰ THI “HIDEC YOUNG INVESTIGATOR AWARDS 2022 THÔNG BÁO MỞ ĐĂNG KÝ DỰ THI HIDEC YOUNG INVESTIGATOR AWARDS 2022 THÔNG BÁO MỞ ĐĂNG KÝ DỰ THI “HIDEC YOUNG INVESTIGATOR AWARDS 2022 THÔNG BÁO MỞ ĐĂNG KÝ DỰ THI HIDEC YOUNG INVESTIGATOR AWARDS 2022',
     excerpt:
       'Ban tổ chức hội nghị Hidec trân trọng kính mời các đơn vị cử người tham dự giải thưởng nghiên cứu khoa học và báo cáo ca lâm sàng “Hidec...',
+    href: '/api/M01/GetDataBlogByID',
+    id: 'ae3379fb-672f-4c19-9cfb-8d6387331a88'
   },
   {
     imageSrc: 'https://implanthcm.com/wp-content/uploads/2022/07/bg-1-193182.jpg',
